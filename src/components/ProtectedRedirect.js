@@ -1,29 +1,30 @@
-import { useRef, ReactElement, memo } from "react"
-import { UserFragment } from "../generated/graphql"
-import { NextComponentType } from "next"
+import { useRef, memo, useEffect } from "react"
 import { useRouter } from "next/router"
 import LoadingIndicator from "./LoadingIndicator"
+import { useSelector } from "react-redux"
 
-const ProtectedRedirect = memo(({ user, children }) => {
+const ProtectedRedirect = memo(({ children }) => {
+    const user = useSelector(state => state.authenticate.user);
     const router = useRouter();
     const routes = useRef(new Map([
-        ['/properties', false],
-        ['/user', true],
-        ['/admin', true],
-        ['/', false],
-        ['/login', false],
-        ['/register', false]
+        ['/properties', true],
+        ['/user', false],
+        ['/admin', false],
+        ['/create-property', false],
+        ['/', true],
+        ['/login', 'authenticate'],
+        ['/register', 'authenticate']
     ]))
 
     const route = routes.current.get(router.pathname);
 
-    if(!user && typeof window != 'undefined' && routes.current.get(router.pathname) != false){
+    if(!user && typeof window != 'undefined' && !routes.current.get(router.pathname)){
         router.push('/login');
 
         return <LoadingIndicator />
     }
 
-    if(route == undefined && typeof window != 'undefined'){
+    if((route == undefined || (user && route == 'authenticate')) && typeof window != 'undefined'){
         router.push('/')
 
         return <LoadingIndicator />
