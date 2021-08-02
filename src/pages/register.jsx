@@ -1,14 +1,28 @@
 import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerRequest } from '../app/slicers/authenticate';
+import Link from 'next/link';
 
 const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)
     const [registerValues, { usernameInput, passwordInput, repeatPasswordInput, nameInput, emailInput, descriptionInput, locationInput }] = createFields(); 
-
+    
+    const {loading, error} = useSelector(state => state.authenticate.registerRequest)
+    const dispatch = useDispatch();
+    
     const setPage = (e, page) => {
         e.preventDefault()
         setPageIndex(page)
+    }
+    
+    
+    const register = (e) => {
+        e.preventDefault();
+        const {repeatPassword, registerObject} = registerValues;
+
+        dispatch(registerRequest(registerObject))
     }
 
     return(
@@ -20,7 +34,7 @@ const Register = () => {
                     {repeatPasswordInput}
                     {emailInput}
                     <button type='submit'>next</button>
-                    <span>Already have an account?<Link to='/login'> Log in.</Link></span>
+                    <span>Already have an account?<Link href='/login'> Log in.</Link></span>
                     <span>{error}</span>
                 </form> :
                 <form onSubmit={register}>
