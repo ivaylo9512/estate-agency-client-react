@@ -4,7 +4,6 @@ import createSaga from 'redux-saga';
 import IndexSagas from './sagas';
 
 const sagaMiddleware = createSaga();
-console.log(sagaMiddleware)
 const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 const store = configureStore({

@@ -1,7 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+if(typeof window != 'undefined'){
+    console.log(localStorage.getItem('user'))
+}
+const user = typeof window != 'undefined' && localStorage.getItem('user') 
+    ? JSON.parse(localStorage.getItem('user'))
+    : undefined;
+
 const initialState = {
-    user: null,
+    user,
     registerRequest: {
         loading: false,
         errorMessage: undefined
@@ -35,7 +42,6 @@ export const authenticateSlice = createSlice({
             }
         },
         onLoginComplete: (state, action) => {
-            console.log('here')
             const { user, error } = action.payload
             state.user = user;
             state.loginRequest = {

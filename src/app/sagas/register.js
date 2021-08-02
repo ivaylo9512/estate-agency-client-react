@@ -19,8 +19,9 @@ function* register({payload}){
         yield put(onRegisterComplete({
             user: data,
         }))
-        
+
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
+        localStorage.setItem('user', data);
         Router.push('/')
     }else{
         yield put(onRegisterComplete({

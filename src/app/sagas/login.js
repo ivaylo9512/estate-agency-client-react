@@ -1,12 +1,10 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { setUser, onLoginComplete } from '../slicers/authenticate';
+import { onLoginComplete } from '../slicers/authenticate';
 import Router from 'next/router';
 import { BASE_URL } from '../../constants';
 
 
-export default function* loginWatcher() { 
-    yield takeLatest('authenticate/loginRequest', login)
-}
+export default takeLatest('authenticate/loginRequest', login)
 
 function* login({payload}) {
     const response = yield fetch(`${BASE_URL}/users/login`,{
@@ -21,15 +19,15 @@ function* login({payload}) {
 
     if(response.ok){
         yield put(onLoginComplete({
-            error: null,
-            user: data
+            user: JSON.parse(data)
         }))
+
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
+        localStorage.setItem('user', data);
         Router.push('/')
     }else{
         yield put(onLoginComplete({
             error: data,
-            user: null
         }))
     }
 }
