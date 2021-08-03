@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-if(typeof window != 'undefined'){
-    console.log(localStorage.getItem('user'))
-}
 const user = typeof window != 'undefined' && localStorage.getItem('user') 
     ? JSON.parse(localStorage.getItem('user'))
     : undefined;
 
 const initialState = {
     user,
+    isAuth: !!user,
     registerRequest: {
         loading: false,
         errorMessage: undefined
@@ -23,11 +21,9 @@ export const authenticateSlice = createSlice({
     name: 'authenticate',
     initialState,
     reducers: {
-        setUser: (state, action) => {
-            state.user = action.payload;
-        },
-        removeUser: () => {
-            state.user = null
+        removeUser: (state) => {
+            state.user = undefined;
+            state.isAuth = false;
         },
         loginRequest: (state) => {
             state.loginRequest = {
@@ -43,7 +39,8 @@ export const authenticateSlice = createSlice({
         },
         onLoginComplete: (state, action) => {
             const { user, error } = action.payload
-            state.user = user;
+            state.user = user
+            state.isAuth = true;
             state.loginRequest = {
                 loading: false,
                 error
@@ -51,7 +48,8 @@ export const authenticateSlice = createSlice({
         },
         onRegisterComplete: (state, action) => {
             const { user, error } = action.payload
-            state.user = user;
+            state.user = user
+            state.isAuth = true;
             state.registerRequest = {
                 loading: false,
                 error
@@ -60,5 +58,5 @@ export const authenticateSlice = createSlice({
     }
 })
 
-export const { setUser, removeUser, loginRequest, registerRequest, onLoginComplete, onRegisterComplete } = authenticateSlice.actions
+export const { removeUser, loginRequest, registerRequest, onLoginComplete, onRegisterComplete } = authenticateSlice.actions
 export default authenticateSlice.reducer
