@@ -2,7 +2,23 @@ import useInput from "../hooks/useInput"
 import { useEffect } from "react";
 
 const CreateProperty = () => {
+    const [createValues, { nameInput, priceInput, locationInput, sizeInput, descriptionInput }] = createInputs(); 
 
+    return(
+        <section>
+            <h1>CreateProperty</h1>
+            <label>Name:</label>
+            {nameInput}
+            <label>Price:</label>
+            {priceInput}
+            <label>Location:</label>
+            {locationInput}
+            <label>Size:</label>
+            {sizeInput}
+            <label>description:</label>
+            {descriptionInput}
+        </section>
+    )
 }
 export default CreateProperty
 

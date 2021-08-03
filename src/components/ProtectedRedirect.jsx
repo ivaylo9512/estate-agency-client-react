@@ -15,7 +15,7 @@ const ProtectedRedirect = memo(({ children }) => {
         ['/login', 'authenticate'],
         ['/register', 'authenticate']
     ]))
-
+    
     const route = routes.current.get(router.pathname);
 
     if(!user && typeof window != 'undefined' && !routes.current.get(router.pathname)){
