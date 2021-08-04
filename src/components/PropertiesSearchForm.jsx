@@ -2,38 +2,55 @@ import useInput from "../hooks/useInput"
 import useMinMaxInput from "../hooks/useMinMaxInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
+import { useDispatch, useSelector } from "react-redux";
+import { getProperties, resetState } from "../app/slicers/propertiesPaginationSlicer";
+import { useState, useEffect } from "react";
 
-const PropertySearchForm = () => {
-    const [values, {locationInput, minPriceInput, maxPriceInput, bedroomsInput}] = createInputs();
-    
+const PropertiesSearchForm = () => {
+    const [values, {locationInput, minPriceInput, maxPriceInput}] = createInputs();
+    const [bedroom, setBedrooms] = useState();
+    const dispatch = useDispatch();
+    const query = useSelector(state => state.propertiesPagination.query);
+
+    useEffect(() => {
+        return () => dispatch(resetState()) 
+    },[])
+
     const submit = (e) => {
         e.preventDefault();
+
+        if(values.location){
+            const queryValues = {...query, ...values, pages: 1, bedrooms: e.target.bedrooms.value};
+            dispatch(resetState())
+            dispatch(getProperties(queryValues))
+        }
     }
-    
+
     return(
         <form onSubmit={submit}>
             {locationInput}
             {minPriceInput}
             {maxPriceInput}
             <label htmlFor='bedroom'><FontAwesomeIcon icon={faBed}/></label>
-            <select name='bedrooms'>
+            <select onChange={(e) => setBedrooms(e.target.value)} name='bedrooms'>
+                <option value='0'>any</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
             </select>
-            {bedroomsInput}
             <button />
         </form>
     )
 }
-export default PropertySearchForm
+export default PropertiesSearchForm
 
 const createInputs = () => {
     const [location, locationInput] = useInput({
         name: 'location',
-        placeholder: 'location'
+        placeholder: 'location',
+        initialValue: ''
     });
 
     const [minPrice, maxPrice, minPriceInput, maxPriceInput] = useMinMaxInput({
@@ -45,14 +62,5 @@ const createInputs = () => {
         maxInitial: 5000 * 1000
     });
 
-    const [bedrooms, bedroomsInput] = useInput({
-        name: 'bedrooms',
-        type: 'number',
-        validationRules: {
-            min: 0,
-            max: 10
-        }
-    });
-
-    return [{location, minPrice, maxPrice, bedrooms}, {locationInput, minPriceInput, maxPriceInput, bedroomsInput}]
+    return [{location, minPrice, maxPrice}, {locationInput, minPriceInput, maxPriceInput}]
 } 
