@@ -1,14 +1,12 @@
 import { BASE_URL } from "../../constants";
-import { setProperties } from "../slicers/propertiesPagination-slicer";
+import { setProperties, getPropertiesData } from "../slicers/propertiesPaginationSlicer";
 
 const { takeEvery, select, put } = require("redux-saga/effects");
 
 export default takeEvery('propertiesPagination/getProperties', getProperties)
 
-const getPropertiesState = state => state.propertiesPagination.data;
-
 function* getProperties({payload: query}) {
-    const { minPrice, maxPrice, location, bedrooms, take, direction, pages, lastId } =  getQueryData(query, yield select(getPropertiesState))
+    const { minPrice, maxPrice, location, bedrooms, take, direction, pages, lastId } =  getQueryData(query, yield select(getPropertiesData))
 
     const response = yield fetch(`${BASE_URL}/properties/findByWithPage/${pages}/${location}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
     const data = yield response.json();
