@@ -3,7 +3,7 @@ import useMinMaxInput from "../hooks/useMinMaxInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties, resetState } from "../app/slicers/propertiesPaginationSlicer";
+import { getProperties, resetPropertiesState } from "../app/slices/propertiesPaginationSlice";
 import { useState, useEffect } from "react";
 
 const PropertiesSearchForm = () => {
@@ -13,7 +13,7 @@ const PropertiesSearchForm = () => {
     const query = useSelector(state => state.propertiesPagination.query);
 
     useEffect(() => {
-        return () => dispatch(resetState()) 
+        return () => dispatch(resetPropertiesState()) 
     },[])
 
     const submit = (e) => {
@@ -21,7 +21,7 @@ const PropertiesSearchForm = () => {
 
         if(values.location){
             const queryValues = {...query, ...values, pages: 1, bedrooms: e.target.bedrooms.value};
-            dispatch(resetState())
+            dispatch(resetPropertiesState())
             dispatch(getProperties(queryValues))
         }
     }
@@ -39,6 +39,8 @@ const PropertiesSearchForm = () => {
                 <option>3</option>
                 <option>4</option>
                 <option>5</option>
+                <option>6</option>
+                <option>7</option>
             </select>
             <button />
         </form>
