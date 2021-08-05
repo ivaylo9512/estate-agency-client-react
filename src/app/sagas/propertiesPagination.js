@@ -1,5 +1,6 @@
 import { BASE_URL } from "../../constants";
-import { setProperties, getPropertiesData } from "../slices/propertiesPaginationSlice";
+import { onPropertiesComplete, getPropertiesData } from "../slices/propertiesPaginationSlice";
+import { onUserPropertiesFail } from "../slices/userPropertiesPaginationSlice";
 
 const { takeEvery, select, put } = require("redux-saga/effects");
 
@@ -9,15 +10,21 @@ function* getProperties({payload: query}) {
     const { minPrice, maxPrice, location, bedrooms, take, direction, takeAmount, lastId } =  getQueryData(query, yield select(getPropertiesData))
 
     const response = yield fetch(`${BASE_URL}/properties/findByWithPage/${takeAmount}/${location.replace(/[\\?%#/'"]/g, '')}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
-    const data = yield response.json();
+    
+    if(response.ok){
+        const data = yield response.json();
 
-    data.length = data.properties.length;
-    data.properties = splitProperties(data, take)
+        data.length = data.properties.length;
+        data.properties = splitProperties(data, take)
+    
+        yield put(onPropertiesComplete({
+            data,
+            query
+        }))
+    }else{
+        yield put(onUserPropertiesFail(yield response.text()));
+    }
 
-    yield put(setProperties({
-        data,
-        query
-    }))
 }
 
 const splitProperties = (data, take) => {
