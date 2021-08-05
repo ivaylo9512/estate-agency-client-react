@@ -22,10 +22,12 @@ const userPropertiesPaginationSilce = createSlice({
     initialState,
     reducers: {
         resetUserPropertiesState(state){
+            state.error = null
             state.data = initialState.data
             state.query = initialState.query;
         },
         onUserPropertiesComplete(state, {payload: {data, query}}){
+            state.error = null
             state.query = query;
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
@@ -43,6 +45,7 @@ const userPropertiesPaginationSilce = createSlice({
             state.error = null;
         },
         setUserPropertiesDirection(state, action){
+            state.error = null
             state.query = initialState.query
             state.data = initialState.data
             state.query.direction = action.payload.direction

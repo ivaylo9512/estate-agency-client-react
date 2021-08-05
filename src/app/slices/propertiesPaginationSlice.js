@@ -26,8 +26,10 @@ const propertiesPaginationSilce = createSlice({
         resetPropertiesState(state){
             state.data = initialState.data
             state.query = initialState.query;
+            state.error = initialState.error;
         },
         onPropertiesComplete(state, {payload: {data, query}}){
+            state.error = null
             state.query = query;
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
@@ -41,11 +43,13 @@ const propertiesPaginationSilce = createSlice({
             state.error = payload
         },
         getProperties(state){
+            state.error = null
             state.data.isLoading = true;
         },
         setPropertiesDirection(state, action){
             state.query = initialState.query
             state.data = initialState.data
+            state.error = initialState.error;
             state.query.direction = action.payload.direction
         },
         setCurrentProperties(state, action){
