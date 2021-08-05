@@ -1,5 +1,8 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import authenticateReducer from './slicers/authenticate';
+import authenticate from './slices/authenticate';
+import propertiesPagination from './slices/propertiesPaginationSlice';
+import createProperty from './slices/createPropertySlice';
+import userPropertiesPagination from './slices/userPropertiesPaginationSlice';
 import createSaga from 'redux-saga';
 import IndexSagas from './sagas';
 
@@ -8,7 +11,10 @@ const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 const store = configureStore({
     reducer: {
-        authenticate: authenticateReducer
+        authenticate,
+        propertiesPagination,
+        createProperty,
+        userPropertiesPagination
     },
     middleware
 })

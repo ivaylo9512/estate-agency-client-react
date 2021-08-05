@@ -1,14 +1,14 @@
 import { BASE_URL } from "../../constants";
-import { setProperties, getPropertiesData } from "../slicers/propertiesPaginationSlicer";
+import { setProperties, getPropertiesData } from "../slices/propertiesPaginationSlice";
 
 const { takeEvery, select, put } = require("redux-saga/effects");
 
 export default takeEvery('propertiesPagination/getProperties', getProperties)
 
 function* getProperties({payload: query}) {
-    const { minPrice, maxPrice, location, bedrooms, take, direction, pages, lastId } =  getQueryData(query, yield select(getPropertiesData))
+    const { minPrice, maxPrice, location, bedrooms, take, direction, takeAmount, lastId } =  getQueryData(query, yield select(getPropertiesData))
 
-    const response = yield fetch(`${BASE_URL}/properties/findByWithPage/${pages}/${location}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
+    const response = yield fetch(`${BASE_URL}/properties/findByWithPage/${takeAmount}/${location.replace(/[\\?%#/'"]/g, '')}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
     const data = yield response.json();
 
     data.length = data.properties.length;
@@ -31,17 +31,19 @@ const splitProperties = (data, take) => {
 
 const getQueryData = (query, state) => {
     let minPrice = query.minPrice;
+    let maxPrice = query.maxPrice;
     let lastId = 0;
-    let pages = query.take * query.pages;
+    let takeAmount = query.take * query.pages;
 
-    if(minPrice == undefined){
+    if(!state.isInitial){
         const lastPage = state.properties[state.properties.length - 1];
-        const lastProperty = lastPage[lastPage.length - 1];
+        const {id, price} = lastPage[lastPage.length - 1];
         
-        lastId = lastProperty.id;
-        minPrice = lastProperty.price; 
+        lastId = id;
+        query.direction == 'ASC' ? minPrice = price 
+            : maxPrice = price
     }
 
-    return {...query, minPrice, lastId, pages}
+    return {...query, minPrice, maxPrice, lastId, takeAmount}
 }
 

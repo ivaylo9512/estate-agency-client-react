@@ -11,7 +11,7 @@ function* createProperty({payload}){
         method: 'POST',
         headers: {
             'Content-Type': 'Application/json',
-            'Authorization': `Bearer ${localStorage.getItem('Authorization')}`
+            Authorization: `Bearer ${localStorage.getItem('Authorization')}`
         },
         body: JSON.stringify(payload)
     })
