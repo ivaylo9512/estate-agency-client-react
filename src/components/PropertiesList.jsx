@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { getPropertiesData } from "../app/slicers/propertiesPaginationSlicer"
+import { getPropertiesData, getProperties, getPropertiesState, setCurrentProperties } from "../app/slices/propertiesPaginationSlice"
 import LoadingIndicator from "../components/LoadingIndicator";
 import PropertiesPagination from "../components/PropertiesPagination";
 
@@ -10,10 +10,9 @@ const PropertiesList = () => {
         <div>
             {!isInitial && 
                 <>
-                    {!currentProperties ?
-                        <span>No properties found with given search.</span>
-                        :
-                        <div>
+                    {!currentProperties 
+                        ? <span>No properties found with given search.</span>
+                        : <>
                             <div> 
                                 {isLoading
                                     ? <LoadingIndicator />
@@ -25,8 +24,8 @@ const PropertiesList = () => {
                                     )
                                 }
                             </div>
-                            <PropertiesPagination />
-                        </div>
+                            <PropertiesPagination selector={getPropertiesState} setCurrentProperties={setCurrentProperties} getProperties={getProperties} />
+                        </>
                     }
                 </>
             }

@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { getProperties, getPropertiesState, setCurrentProperties } from "../app/slicers/propertiesPaginationSlicer";
 
-const PropertiesPagination = () => {
-    const { data: { properties, pages, isLoading }, query } = useSelector(getPropertiesState);
+const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) => {
+    const {data: { properties, pages, isLoading }, query } = useSelector(selector);
+
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const PropertiesPagination = () => {
         }
 
         const pages = nextPage - page; 
-        dispatch(getProperties({...query, pages, minPrice: null}))
+        dispatch(getProperties({...query, pages}))
         setPage(nextPage)
     }
     

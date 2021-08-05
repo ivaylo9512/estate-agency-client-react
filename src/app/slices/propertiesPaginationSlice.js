@@ -18,7 +18,7 @@ const initialState = {
     }
 }
 
-const propertiesPaginationSilcer = createSlice({
+const propertiesPaginationSilce = createSlice({
     name: 'propertiesPagination',
     initialState,
     reducers: {
@@ -31,9 +31,9 @@ const propertiesPaginationSilcer = createSlice({
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
             state.data.properties = [...state.data.properties, ...data.properties];
+            state.data.currentProperties = data.properties[data.properties.length - 1]
             state.data.isLoading = false;
             state.data.isInitial = false;
-            state.data.currentProperties = data.properties[data.properties.length - 1]
         },
         getProperties(state){
             state.data.isLoading = true;
@@ -46,11 +46,10 @@ const propertiesPaginationSilcer = createSlice({
         setCurrentProperties(state, action){
             state.data.currentProperties = action.payload
         }
-        
     }
 })
-export const {resetState, setProperties, getProperties, setDirection, setCurrentProperties} = propertiesPaginationSilcer.actions
-export default propertiesPaginationSilcer.reducer
+export const {resetState, setProperties, getProperties, setDirection, setCurrentProperties} = propertiesPaginationSilce.actions
+export default propertiesPaginationSilce.reducer
 
 export const getPropertiesData = state => state.propertiesPagination.data;
 export const getPropertiesQuery = state => state.propertiesPagination.query;

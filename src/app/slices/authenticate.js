@@ -8,16 +8,16 @@ const initialState = {
     user,
     isAuth: !!user,
     registerRequest: {
-        loading: false,
-        errorMessage: undefined
+        isLoading: false,
+        error: undefined
     },
     loginRequest: {
-        loading: false,
+        isLoading: false,
         error: undefined
     }
 }
 
-export const authenticateSlice = createSlice({
+const authenticateSlice = createSlice({
     name: 'authenticate',
     initialState,
     reducers: {
@@ -27,13 +27,13 @@ export const authenticateSlice = createSlice({
         },
         loginRequest: (state) => {
             state.loginRequest = {
-                loading: true,
+                isLoading: true,
                 error: undefined
             }
         },
         registerRequest: (state) => {
             state.registerRequest = {
-                loading: true,
+                isLoading: true,
                 error: undefined
             }
         },
@@ -42,7 +42,7 @@ export const authenticateSlice = createSlice({
             state.user = user
             state.isAuth = true;
             state.loginRequest = {
-                loading: false,
+                isLoading: false,
                 error
             }
         },
@@ -51,7 +51,7 @@ export const authenticateSlice = createSlice({
             state.user = user
             state.isAuth = true;
             state.registerRequest = {
-                loading: false,
+                isLoading: false,
                 error
             }
         }

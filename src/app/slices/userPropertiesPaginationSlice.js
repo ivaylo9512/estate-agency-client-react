@@ -12,7 +12,7 @@ const initialState = {
     query: {
         take: 2,
         direction: 'ASC',
-        name: null,
+        name: '',
     }
 }
 
@@ -20,11 +20,11 @@ const userPropertiesPaginationSilce = createSlice({
     name: 'userPropertiesPagination',
     initialState,
     reducers: {
-        resetState(state){
+        resetUserPropertiesState(state){
             state.data = initialState.data
             state.query = initialState.query;
         },
-        setProperties(state, {payload: {data, query}}){
+        setUserProperties(state, {payload: {data, query}}){
             state.query = query;
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
@@ -33,23 +33,22 @@ const userPropertiesPaginationSilce = createSlice({
             state.data.isLoading = false;
             state.data.isInitial = false;
         },
-        getProperties(state){
+        getUserProperties(state){
             state.data.isLoading = true;
         },
-        setDirection(state, action){
+        setUserPropertiesDirection(state, action){
             state.query = initialState.query
             state.data = initialState.data
             state.query.direction = action.payload.direction
         },
-        setCurrentProperties(state, action){
+        setCurrentUserProperties(state, action){
             state.data.currentProperties = action.payload
         }
-        
     }
 })
-export const {resetState, setProperties, getProperties, setDirection, setCurrentProperties} = userPropertiesPaginationSilce.actions
+export const {resetUserPropertiesState, setUserProperties, getUserProperties, setUserPropertiesDirection, setCurrentUserProperties} = userPropertiesPaginationSilce.actions
 export default userPropertiesPaginationSilce.reducer
 
-export const getPropertiesData = state => state.userPropertiesPagination.data;
-export const getPropertiesQuery = state => state.userPropertiesPagination.query;
-export const getPropertiesState = state => state.userPropertiesPagination;
+export const getUserPropertiesData = state => state.userPropertiesPagination.data;
+export const getUserPropertiesQuery = state => state.userPropertiesPagination.query;
+export const getUserPropertiesState = state => state.userPropertiesPagination;
