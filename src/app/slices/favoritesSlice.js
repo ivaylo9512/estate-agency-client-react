@@ -25,7 +25,7 @@ const favoritesSlice = createSlice({
             state.error = null;
         },
         onFavoritesError: (state, {payload}) => {
-            state.isLoading = fasle;
+            state.isLoading = false;
             state.error = payload
         }
     }

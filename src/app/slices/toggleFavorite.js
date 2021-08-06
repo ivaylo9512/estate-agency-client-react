@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit")
 
 const initialState = {
-    favoriteStates: new Map()
+    favoriteStates: {}
 }
 
 const toggleFavoriteSlice = createSlice({
@@ -9,46 +9,46 @@ const toggleFavoriteSlice = createSlice({
     initialState,
     reducers:{
         addFavorite: (state, {payload}) => {
-            state.favoriteStates.set(payload, {
+            state.favoriteStates[payload] = {
                 isLoading: true,
                 error: null,
                 isFavorite: true
-            });
+            };
         },
         removeFavorite: (state, {payload}) => {
-            state.favoriteStates.set(payload, {
+            state.favoriteStates[payload] = {
                 isLoading: true,
                 error: null,
                 isFavorite: false
-            })
+            }
         },
-        onAddFavoriteComplete: (state, {payload: {id}}) => {
-            state.favoriteStates.set(id, {
+        onAddFavoriteComplete: (state, {payload}) => {
+            state.favoriteStates[payload] = {
                 isLoading: false,
                 error: null,
                 isFavorite: true
-            });
+            }
         },
         onAddFavoriteError: (state, {payload: {id, error}}) => {
-            state.favoriteStates.set(id, {
+            state.favoriteStates[id] = {
                 isLoading: false,
                 error: error,
                 isFavorite: false
-            })
+            }
         },
         onRemoveFavoriteComplete: (state, {payload}) => {
-            state.favoriteStates.set(id, {
+            state.favoriteStates[payload] = {
                 isLoading: false,
-                error: error,
+                error: null,
                 isFavorite: false
-            })
+            }
         },
         onRemoveFavoriteError: (state, {payload: {id, error}}) => {
-            state.favoriteStates.set(id, {
+            state.favoriteStates[id] = {
                 isLoading: false,
                 error: error,
                 isFavorite: true
-            })
+            }
         },
         resetToggleFavoriteState: (state) => {
             state.favoriteStates = initialState.favoriteStates
@@ -56,6 +56,6 @@ const toggleFavoriteSlice = createSlice({
     }
 })
 
-export const {onAddFavoriteComplete, onAddFavoriteError, addFavorite, removeFavorite, onRemoveFavoriteComplete, onRemoveFavoriteError, resetToggleFavoriteState} = addFavoriteSlice.actions;
-export default addFavoriteSlice.reducer;
-export const getToggleFavoriteState = state => state.toggleFavorite;
+export const {onAddFavoriteComplete, onAddFavoriteError, addFavorite, removeFavorite, onRemoveFavoriteComplete, onRemoveFavoriteError, resetToggleFavoriteState} = toggleFavoriteSlice.actions;
+export default toggleFavoriteSlice.reducer;
+export const getToggleFavoriteState = state => state.toggleFavorite.favoriteStates;

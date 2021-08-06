@@ -7,15 +7,18 @@ export default takeEvery('toggleFavorite/addFavorite', addFavorite)
 
 function* addFavorite({payload: id}){
     const response = yield fetch(`${BASE_URL}/properties/auth/addFavorite/${id}`, {
+        method: 'PATCH',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('Authorization')}`
         }
     })
 
-    const data = response.text();
     if(response.ok){
-        yield put(onAddFavoriteComplete(data));
+        yield put(onAddFavoriteComplete(id));
     }else{
-        yield put(onAddFavoriteError(data));
+        yield put(onAddFavoriteError({ 
+            error: yield response.text(), 
+            id
+        }));
     }
 }

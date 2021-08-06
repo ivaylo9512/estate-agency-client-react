@@ -1,5 +1,5 @@
 import { takeLatest, put } from "redux-saga/effects";
-import { getFavorites, onFavoritesComplete, onFavoritesError } from "../slices/favoritesSlice";
+import { onFavoritesComplete, onFavoritesError } from "../slices/favoritesSlice";
 import { BASE_URL } from "../../constants";
 
 export default takeLatest('favorites/getFavorites', getFavorites);
