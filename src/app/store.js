@@ -3,6 +3,7 @@ import authenticate from './slices/authenticate';
 import propertiesPagination from './slices/propertiesPaginationSlice';
 import createProperty from './slices/createPropertySlice';
 import userPropertiesPagination from './slices/userPropertiesPaginationSlice';
+import addFavorite from './slices/addFavorite';
 import favorites from './slices/favoritesSlice';
 import createSaga from 'redux-saga';
 import IndexSagas from './sagas';
@@ -16,7 +17,8 @@ const store = configureStore({
         propertiesPagination,
         createProperty,
         userPropertiesPagination,
-        favorites
+        favorites,
+        addFavorite
     },
     middleware
 })
