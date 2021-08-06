@@ -2,13 +2,14 @@ import { useRef, memo, useEffect } from "react"
 import { useRouter } from "next/router"
 import LoadingIndicator from "./LoadingIndicator"
 import { useSelector } from "react-redux"
+import { getUser } from "../app/slices/authenticate"
 
 const ProtectedRedirect = memo(({ children }) => {
-    const user = useSelector(state => state.authenticate.user);
+    const user = useSelector(getUser);
     const router = useRouter();
     const routes = useRef(new Map([
         ['/properties', true],
-        ['/user', false],
+        ['/account', false],
         ['/admin', false],
         ['/create-property', false],
         ['/', true],

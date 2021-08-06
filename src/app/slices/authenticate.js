@@ -60,3 +60,8 @@ const authenticateSlice = createSlice({
 
 export const { removeUser, loginRequest, registerRequest, onLoginComplete, onRegisterComplete } = authenticateSlice.actions
 export default authenticateSlice.reducer
+
+export const getLoginRequest = state => state.authenticate.loginRequest;
+export const getRegisterRequest = state => state.authenticate.registerRequest;
+export const getUser = state => state.authenticate.user;
+export const getIsAuth = state => state.authenticate.isAauth;

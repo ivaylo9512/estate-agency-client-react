@@ -2,7 +2,7 @@ import useInput from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerRequest } from '../app/slicers/authenticate';
+import { registerRequest, getRegisterRequest } from '../app/slices/authenticate';
 import Link from 'next/link';
 import InputWithError from '../components/InputWithError';
 
@@ -10,7 +10,7 @@ const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)
     const [registerValues, { usernameInput, passwordInput, repeatPasswordInput, nameInput, emailInput, descriptionInput, locationInput }] = createFields(); 
     
-    const {loading, error} = useSelector(state => state.authenticate.registerRequest)
+    const {isLoading, error} = useSelector(getRegisterRequest)
     const dispatch = useDispatch();
     
     const setPage = (e, page) => {

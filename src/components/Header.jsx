@@ -1,13 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
-import { useEffect } from "react";
-
-const { useDispatch } = require("react-redux");
-const { removeUser } = require("../app/slicers/authenticate");
+import { removeUser, getIsAuth } from "../app/slices/authenticate";
 
 const Header = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector(state => state.authenticate.isAuth);
+    const isAuth = useSelector(getIsAuth);
 
     const logout = () => {
         dispatch(removeUser())
@@ -22,6 +19,7 @@ const Header = () => {
             {isAuth ?
                 <>
                     <Link href='/create-property'>create</Link>
+                    <Link href='/account'>account</Link>
                     <button onClick={logout}>logout</button>
                 </>
                 :

@@ -5,6 +5,7 @@ const initialState = {
         length: 0,
         properties: [],
         pages: 0,
+        lastProperty: null,
         isLoading: false,
         isInitial: true,
         currentProperties: null
@@ -31,6 +32,7 @@ const userPropertiesPaginationSilce = createSlice({
             state.query = query;
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
+            state.data.lastProperty = data.lastProperty;
             state.data.properties = [...state.data.properties, ...data.properties];
             state.data.currentProperties = data.properties[data.properties.length - 1]
             state.data.isLoading = false;

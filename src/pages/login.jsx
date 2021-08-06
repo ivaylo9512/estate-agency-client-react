@@ -3,13 +3,13 @@ import Link from 'next/link'
 import validateEmail from "../utils/validateEmail";
 import usePasswordInput from "../hooks/usePasswordInput";
 import { useDispatch, useSelector } from "react-redux";
-import { loginRequest } from "../app/slicers/authenticate";
+import { loginRequest, getLoginRequest } from "../app/slices/authenticate";
 import { useEffect } from "react";
 
 const Login = () => {
     const [{usernameOrEmail, password}, {usernameOrEmailInput, passwordInput}] = useCreateInputs();
     const dispatch = useDispatch();
-    const {loading, error} = useSelector(state => state.authenticate.loginRequest)
+    const {isLoading, error} = useSelector(getLoginRequest)
 
     const login = (e) => {
         e.preventDefault();

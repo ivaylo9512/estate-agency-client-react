@@ -18,6 +18,7 @@ function* getProperties({payload: query}) {
 
 
         data.length = data.properties.length;
+        data.lastProperty = data.properties[data.properties.length - 1]
         data.properties = splitProperties(data, take)
     
         yield put(onUserPropertiesComplete({
@@ -43,8 +44,7 @@ const getQueryData = (query, state) => {
     let lastName;
     
     if(!state.isInitial){
-        const lastPage = state.properties[state.properties.length - 1];
-        const {id, name} = lastPage[lastPage.length - 1];
+        const {id, name} = state.lastProperty;
 
         lastId = id;
 
