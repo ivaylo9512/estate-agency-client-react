@@ -9,11 +9,11 @@ const initialState = {
     isAuth: !!user,
     registerRequest: {
         isLoading: false,
-        error: undefined
+        error: null
     },
     loginRequest: {
         isLoading: false,
-        error: undefined
+        error: null
     }
 }
 
@@ -21,44 +21,42 @@ const authenticateSlice = createSlice({
     name: 'authenticate',
     initialState,
     reducers: {
-        removeUser: (state) => {
+        loginRequest: (state) => {
+            state.loginRequest.isLoading = true;
+            state.loginRequest.error = null;
+        },
+        registerRequest: (state) => {
+            state.registerRequest.isLoading = true;
+            state.registerRequest.error = null;
+        },
+        onLoginComplete: (state, {payload}) => {
+            state.user = payload
+            state.isAuth = true;
+            state.loginRequest.isLoading = false;
+            state.loginRequest.error = null;
+        },
+        onLoginError: (state, {payload}) => {
+            state.loginRequest.isLoading = false;
+            state.loginRequest.error = payload;
+        },
+        onRegisterComplete: (state, {payload}) => {
+            state.user = payload
+            state.isAuth = true;
+            state.registerRequest.isLoading = false;
+            state.registerRequest.error = null;
+        },
+        onRegisterError: (state, {payload}) => {
+            state.registerRequest.isLoading = false;
+            state.registerRequest.error = payload;
+        },
+        onLogout: (state) => {
             state.user = undefined;
             state.isAuth = false;
         },
-        loginRequest: (state) => {
-            state.loginRequest = {
-                isLoading: true,
-                error: undefined
-            }
-        },
-        registerRequest: (state) => {
-            state.registerRequest = {
-                isLoading: true,
-                error: undefined
-            }
-        },
-        onLoginComplete: (state, action) => {
-            const { user, error } = action.payload
-            state.user = user
-            state.isAuth = true;
-            state.loginRequest = {
-                isLoading: false,
-                error
-            }
-        },
-        onRegisterComplete: (state, action) => {
-            const { user, error } = action.payload
-            state.user = user
-            state.isAuth = true;
-            state.registerRequest = {
-                isLoading: false,
-                error
-            }
-        }
     }
 })
 
-export const { removeUser, loginRequest, registerRequest, onLoginComplete, onRegisterComplete } = authenticateSlice.actions
+export const { removeUser, loginRequest, registerRequest, onLoginComplete, onLoginError, onRegisterComplete, onRegisterError } = authenticateSlice.actions
 export default authenticateSlice.reducer
 
 export const getLoginRequest = state => state.authenticate.loginRequest;
