@@ -30,7 +30,6 @@ const propertiesPaginationSilce = createSlice({
             state.error = initialState.error;
         },
         onPropertiesComplete(state, {payload: {data, query}}){
-            state.error = null
             state.query = query;
             state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
             state.data.length = state.data.length + data.length;
@@ -39,6 +38,7 @@ const propertiesPaginationSilce = createSlice({
             state.data.currentProperties = data.properties[data.properties.length - 1]
             state.data.isLoading = false;
             state.data.isInitial = false;
+            state.error = null
         },
         onPropertiesFail(state, {payload}){
             state.data.isLoading = false

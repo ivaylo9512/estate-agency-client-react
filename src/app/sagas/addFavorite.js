@@ -1,7 +1,6 @@
 import { BASE_URL } from "../../constants";
 import { onAddFavoriteComplete, onAddFavoriteError } from "../slices/toggleFavorite";
-
-const { takeEvery, put } = require("redux-saga/effects");
+import { takeEvery, put } from 'redux-saga/effects';
 
 export default takeEvery('toggleFavorite/addFavorite', addFavorite)
 

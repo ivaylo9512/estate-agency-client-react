@@ -1,8 +1,7 @@
 import { BASE_URL } from "../../constants";
 import Router from 'next/router';
 import { onCreatePropertyComplete } from "../slices/createPropertySlice";
-
-const { takeLatest, put } = require("redux-saga/effects");
+import { takeLatest, put } from 'redux-saga/effects';
 
 export default takeLatest('createProperty/createPropertyRequest', createProperty);
 

@@ -1,10 +1,9 @@
 import { BASE_URL } from "../../constants";
 import { onPropertiesComplete, getPropertiesData } from "../slices/propertiesPaginationSlice";
 import { onUserPropertiesFail } from "../slices/userPropertiesPaginationSlice";
+import { takeLatest, select, put } from 'redux-saga/effects';
 
-const { takeEvery, select, put } = require("redux-saga/effects");
-
-export default takeEvery('propertiesPagination/getProperties', getProperties)
+export default takeLatest('propertiesPagination/getProperties', getProperties)
 
 function* getProperties({payload: query}) {
     const { minPrice, maxPrice, location, bedrooms, take, direction, takeAmount, lastId } =  getQueryData(query, yield select(getPropertiesData))

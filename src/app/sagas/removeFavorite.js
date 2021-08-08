@@ -1,7 +1,6 @@
 import { BASE_URL } from "../../constants";
 import { onRemoveFavoriteComplete, onRemoveFavoriteError } from "../slices/toggleFavorite";
-
-const { takeEvery, put } = require("redux-saga/effects");
+import { takeEvery, put } from 'redux-saga/effects';
 
 export default takeEvery('toggleFavorite/removeFavorite', removeFavorite)
 
@@ -16,7 +15,7 @@ function* removeFavorite({payload: id}){
     if(response.ok){
         yield put(onRemoveFavoriteComplete(id));
     }else{
-        yield put(onAddFavoriteError({ 
+        yield put(onRemoveFavoriteError({ 
             error: yield response.text(), 
             id
         }));
