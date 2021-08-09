@@ -2,6 +2,7 @@ import { BASE_URL } from "../../constants";
 import { onPropertiesComplete, getPropertiesData } from "../slices/propertiesPaginationSlice";
 import { onUserPropertiesFail } from "../slices/userPropertiesPaginationSlice";
 import { takeLatest, select, put } from 'redux-saga/effects';
+import splitArray from "../../utils/splitArray";
 
 export default takeLatest('propertiesPagination/getProperties', getProperties)
 
@@ -15,7 +16,7 @@ function* getProperties({payload: query}) {
 
         data.length = data.properties.length;
         data.lastProperty = data.properties[data.properties.length - 1];
-        data.properties = splitProperties(data, take)
+        data.properties = splitArray(data, take)
 
         yield put(onPropertiesComplete({
             data,
@@ -25,15 +26,6 @@ function* getProperties({payload: query}) {
         yield put(onUserPropertiesFail(yield response.text()));
     }
 
-}
-
-const splitProperties = (data, take) => {
-    return data.properties.reduce((result, property, i) => {
-        const page = Math.floor(i  / take);
-        result[page] = result[page] ? (result[page].push(property), result[page]) : [property]
-
-        return result; 
-    }, []);
 }
 
 const getQueryData = (query, state) => {
