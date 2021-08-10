@@ -19,5 +19,9 @@ function* addFavorite({payload: id}){
             error: yield response.text(), 
             id
         }));
+
+        if(response.status == 401){
+            throw new UnauthorizedException(message);            
+        } 
     }
 }

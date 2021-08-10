@@ -16,12 +16,15 @@ function* createProperty({payload}){
     })
 
     const data = yield response.json();
-    if(!response.ok){
-        console.log('here')
+    if(response.ok){
+        Router.push('/');
+    }else{
         yield put(onCreatePropertyComplete({
             error: data
         }))
-    }else{
-        Router.push('/');
+        
+        if(response.status == 401){
+            throw new UnauthorizedException(message);            
+        } 
     }
 }

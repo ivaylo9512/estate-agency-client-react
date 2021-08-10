@@ -11,3 +11,18 @@ import userPropertiesPaginationWatcher from './userPropertiesPagination';
 export default function* IndexSagas(){
     yield all([registerWatcher, loginWatcher, propertiesPaginationWatcher, createPropertyWatcher, userPropertiesPaginationWatcher, favoritesWatcher, addFavoriteWatcher, removeFavoriteWatcher])
 }
+
+export function authWrapper(request){
+    return function*(action){
+        try{
+            yield request(action);
+        }catch(err){
+            if(err.message == 'Jwt token has expired.'){
+                return yield put(onLogout('Session has expired.')); 
+            }
+            if(err.message == 'Jwt is incorrect.' || err.message == 'Jwt is missing.'){
+                return yield put(onLogout());
+            }
+        }
+    }
+}

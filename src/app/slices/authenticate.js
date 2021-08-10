@@ -49,7 +49,8 @@ const authenticateSlice = createSlice({
             state.registerRequest.isLoading = false;
             state.registerRequest.error = payload;
         },
-        onLogout: (state) => {
+        onLogout: (state, {payload}) => {
+            state.loginRequest.error = payload
             state.user = undefined;
             state.isAuth = false;
         },

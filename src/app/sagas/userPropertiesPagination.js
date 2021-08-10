@@ -27,6 +27,10 @@ function* getProperties({payload: query}) {
         }))        
     }else{
         yield put(onUserPropertiesFail(yield response.text()));
+
+        if(response.status == 401){
+            throw new UnauthorizedException(message);            
+        } 
     }
 }
 
