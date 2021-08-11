@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
@@ -5,6 +6,7 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) =
     const {data: { properties, pages, isLoading }, query } = useSelector(selector);
 
     const [page, setPage] = useState(1);
+    const [pages, setPages] = useState(5);
     const dispatch = useDispatch();
 
     const changePage = (nextPage) => {
@@ -12,9 +14,9 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) =
             return;
         }
 
-        const currentProperties = properties[nextPage - 1];
-        if(currentProperties){
-            dispatch(setCurrentProperties(currentProperties));
+        const currentData = properties[nextPage - 1];
+        if(currentData){
+            dispatch(setCurrentProperties(currentData));
             return setPage(nextPage);
         }
 
@@ -22,27 +24,31 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) =
         dispatch(getProperties({...query, pages}))
         setPage(nextPage)
     }
-    
+
+    useEffect(() => {
+        setPage(1);
+    }, [query.name])
+
     return(
         <div>
             {page > 1 &&
-                <>
-                    <button onClick={() => changePage(1)}>{'<<'}</button>
-                    <button onClick={() => changePage(page - 1)}>prev</button>
-                </>
+                <button onClick={() => changePage(page - 1)}>prev</button>
             }
             <ul>
-                {page + -2 > 0 && <li onClick={() => changePage(page - 2)}>{page - 2}</li>}
-                {page + -1 > 0 && <li onClick={() => changePage(page - 1)}>{page - 1}</li>}
-                <li>{page}</li>
-                {page + 1 <= pages && <li onClick={() => changePage(page + 1)}>{page + 1}</li>}
-                {page + 2 <= pages && <li onClick={() => changePage(page + 2)}>{page + 2}</li>}
+                {
+                    Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
+                        const slide = Math.floor(page / pages);
+                        let pageIndex = slide * pages + i;
+                        pageIndex += slide == 0 ? 1 : 0;
+
+                        if(pageIndex <= maxPages){
+                            return <li isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</li>}
+                        }
+                    )
+                }
             </ul>
-            {page < pages &&
-                <>
-                    <button onClick={() => changePage(page + 1)}>next</button>
-                    <button onClick={() => changePage(pages)}>{'>>'}</button>
-                </>
+            {page < maxPages &&
+                <button onClick={() => changePage(page + 1)}>next</button>
             }
         </div>
     )
