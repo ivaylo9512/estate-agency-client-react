@@ -153,3 +153,370 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
   </form>
 </section>
 `;
+
+exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
+<section>
+  <form
+    onSubmit={[Function]}
+  >
+    <InputWithError
+      input={
+        <input
+          autoComplete="username"
+          maxLength={20}
+          minLength={8}
+          name="username"
+          onChange={[Function]}
+          placeholder="username"
+          required={true}
+          type=""
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      input={
+        <usePasswordInput__Container>
+          <input
+            autoComplete="new-password"
+            maxLength={22}
+            minLength={10}
+            name="password"
+            onChange={[Function]}
+            placeholder="password"
+            required={true}
+            type="password"
+            value=""
+          />
+          <usePasswordInput__Button
+            onClick={[Function]}
+            type="button"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={false}
+              flip={null}
+              icon={
+                Object {
+                  "icon": Array [
+                    576,
+                    512,
+                    Array [],
+                    "f06e",
+                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
+                  ],
+                  "iconName": "eye",
+                  "prefix": "fas",
+                }
+              }
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              swapOpacity={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+          </usePasswordInput__Button>
+        </usePasswordInput__Container>
+      }
+    />
+    <InputWithError
+      input={
+        <usePasswordInput__Container>
+          <input
+            autoComplete="new-password"
+            name="repeat-password"
+            onChange={[Function]}
+            placeholder="repeat"
+            required={true}
+            type="password"
+            value=""
+          />
+          <usePasswordInput__Button
+            onClick={[Function]}
+            type="button"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={false}
+              flip={null}
+              icon={
+                Object {
+                  "icon": Array [
+                    576,
+                    512,
+                    Array [],
+                    "f06e",
+                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
+                  ],
+                  "iconName": "eye",
+                  "prefix": "fas",
+                }
+              }
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              swapOpacity={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+          </usePasswordInput__Button>
+        </usePasswordInput__Container>
+      }
+    />
+    <InputWithError
+      input={
+        <input
+          autoComplete="email"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          required={true}
+          type="email"
+          value=""
+        />
+      }
+    />
+    <button
+      type="submit"
+    >
+      next
+    </button>
+    <span>
+      Already have an account?
+      <Link
+        href="/login"
+      >
+         Log in.
+      </Link>
+    </span>
+  </form>
+</section>
+`;
+
+exports[`RegisterSnapshotTests renders correctly with passed error props with page 0 1`] = `
+<section>
+  <form
+    onSubmit={[Function]}
+  >
+    <InputWithError
+      error="Username is already taken."
+      input={
+        <input
+          autoComplete="username"
+          maxLength={20}
+          minLength={8}
+          name="username"
+          onChange={[Function]}
+          placeholder="username"
+          required={true}
+          type=""
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      error="Password must be between 10 and 20 characters."
+      input={
+        <usePasswordInput__Container>
+          <input
+            autoComplete="new-password"
+            maxLength={22}
+            minLength={10}
+            name="password"
+            onChange={[Function]}
+            placeholder="password"
+            required={true}
+            type="password"
+            value=""
+          />
+          <usePasswordInput__Button
+            onClick={[Function]}
+            type="button"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={false}
+              flip={null}
+              icon={
+                Object {
+                  "icon": Array [
+                    576,
+                    512,
+                    Array [],
+                    "f06e",
+                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
+                  ],
+                  "iconName": "eye",
+                  "prefix": "fas",
+                }
+              }
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              swapOpacity={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+          </usePasswordInput__Button>
+        </usePasswordInput__Container>
+      }
+    />
+    <InputWithError
+      error="Password must be between 10 and 20 characters."
+      input={
+        <usePasswordInput__Container>
+          <input
+            autoComplete="new-password"
+            name="repeat-password"
+            onChange={[Function]}
+            placeholder="repeat"
+            required={true}
+            type="password"
+            value=""
+          />
+          <usePasswordInput__Button
+            onClick={[Function]}
+            type="button"
+          >
+            <FontAwesomeIcon
+              border={false}
+              className=""
+              fixedWidth={false}
+              flip={null}
+              icon={
+                Object {
+                  "icon": Array [
+                    576,
+                    512,
+                    Array [],
+                    "f06e",
+                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
+                  ],
+                  "iconName": "eye",
+                  "prefix": "fas",
+                }
+              }
+              inverse={false}
+              listItem={false}
+              mask={null}
+              pull={null}
+              pulse={false}
+              rotation={null}
+              size={null}
+              spin={false}
+              swapOpacity={false}
+              symbol={false}
+              title=""
+              transform={null}
+            />
+          </usePasswordInput__Button>
+        </usePasswordInput__Container>
+      }
+    />
+    <InputWithError
+      error="Email is already taken."
+      input={
+        <input
+          autoComplete="email"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          required={true}
+          type="email"
+          value=""
+        />
+      }
+    />
+    <button
+      type="submit"
+    >
+      next
+    </button>
+    <span>
+      Already have an account?
+      <Link
+        href="/login"
+      >
+         Log in.
+      </Link>
+    </span>
+  </form>
+</section>
+`;
+
+exports[`RegisterSnapshotTests renders correctly with passed error props with page 1 1`] = `
+<section>
+  <form
+    onSubmit={[Function]}
+  >
+    <InputWithError
+      input={
+        <input
+          name="name"
+          onChange={[Function]}
+          placeholder="name"
+          required={true}
+          type=""
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      error="location is required."
+      input={
+        <input
+          name="location"
+          onChange={[Function]}
+          placeholder="location"
+          required={true}
+          type=""
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      error="Description is required."
+      input={
+        <input
+          name="description"
+          onChange={[Function]}
+          placeholder="description"
+          required={true}
+          type=""
+          value=""
+        />
+      }
+    />
+    <button
+      onClick={[Function]}
+    >
+      back
+    </button>
+    <button>
+      register
+    </button>
+  </form>
+</section>
+`;
