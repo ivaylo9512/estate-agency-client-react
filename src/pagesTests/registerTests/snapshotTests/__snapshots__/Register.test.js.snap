@@ -472,6 +472,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
     onSubmit={[Function]}
   >
     <InputWithError
+      error="Name is required."
       input={
         <input
           name="name"

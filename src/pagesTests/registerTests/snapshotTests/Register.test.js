@@ -31,13 +31,13 @@ describe('RegisterSnapshotTests', () => {
     })
 
     it('renders correctly with passed error props with page 0', () => {
-        const wrapper = createWrapper({isLoading: false, error: {username: 'Username is already taken.', password: 'Password must be between 10 and 20 characters.', email: 'Email is already taken.'}});
+        const wrapper = createWrapper({ isLoading: false, error: { username: 'Username is already taken.', password: 'Password must be between 10 and 20 characters.', email: 'Email is already taken.' }});
 
         expect(toJson(wrapper)).toMatchSnapshot();
     })
 
     it('renders correctly with passed error props with page 1', () => {
-        const wrapper = createWrapper({isLoading: false, error: {country: 'Name is required.', location: 'location is required.', description: 'Description is required.'}});
+        const wrapper = createWrapper({ isLoading: false, error: { name: 'Name is required.', location: 'location is required.', description: 'Description is required.' }});
 
         const form = wrapper.find('form');
         form.simulate('submit', { target: form, preventDefault: jest.fn() });
