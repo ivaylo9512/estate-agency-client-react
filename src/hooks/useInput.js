@@ -19,7 +19,7 @@ const useInput = ({ name, placeholder, initialValue = '', type = '', autoComplet
         validate(value);
     }
 
-    const input = <input onChange={onChange} placeholder={placeholder} ref={inputRef} autoComplete={autoComplete} name={name} type={type} {...validationRules} value={value}/>
+    const input = <input onChange={onChange} placeholder={placeholder} ref={inputRef} id={name} autoComplete={autoComplete} name={name} type={type} {...validationRules} value={value}/>
 
 
     return [value, input]

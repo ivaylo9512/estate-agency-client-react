@@ -9,6 +9,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       input={
         <input
           autoComplete="username"
+          id="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -24,6 +25,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       input={
         <input
           autoComplete="email"
+          id="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -38,6 +40,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
+            id="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -91,7 +94,8 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            name="repeat-password"
+            id="repeatPassword"
+            name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
             required={true}
@@ -163,6 +167,7 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       input={
         <input
           autoComplete="username"
+          id="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -178,6 +183,7 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       input={
         <input
           autoComplete="email"
+          id="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -192,6 +198,7 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
+            id="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -245,7 +252,8 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            name="repeat-password"
+            id="repeatPassword"
+            name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
             required={true}
@@ -318,6 +326,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       input={
         <input
           autoComplete="username"
+          id="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -334,6 +343,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       input={
         <input
           autoComplete="email"
+          id="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -349,6 +359,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
+            id="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -403,7 +414,8 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            name="repeat-password"
+            id="repeatPassword"
+            name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
             required={true}
@@ -475,6 +487,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       error="Name is required."
       input={
         <input
+          id="name"
           name="name"
           onChange={[Function]}
           placeholder="name"
@@ -488,6 +501,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       error="location is required."
       input={
         <input
+          id="location"
           name="location"
           onChange={[Function]}
           placeholder="location"
@@ -501,6 +515,7 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       error="Description is required."
       input={
         <input
+          id="description"
           name="description"
           onChange={[Function]}
           placeholder="description"

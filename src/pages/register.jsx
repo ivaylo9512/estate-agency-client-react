@@ -82,7 +82,7 @@ const createFields = () => {
     })
 
     const [repeatPassword, repeatPasswordInput] = usePasswordInput({
-        name: 'repeat-password',
+        name: 'repeatPassword',
         type: 'password',
         autoComplete: 'new-password',
         placeholder: 'repeat',
