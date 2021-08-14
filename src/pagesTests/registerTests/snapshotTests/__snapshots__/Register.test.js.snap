@@ -22,6 +22,19 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
     />
     <InputWithError
       input={
+        <input
+          autoComplete="email"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          required={true}
+          type="email"
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
@@ -122,19 +135,6 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
             />
           </usePasswordInput__Button>
         </usePasswordInput__Container>
-      }
-    />
-    <InputWithError
-      input={
-        <input
-          autoComplete="email"
-          name="email"
-          onChange={[Function]}
-          placeholder="email"
-          required={true}
-          type="email"
-          value=""
-        />
       }
     />
     <button
@@ -176,6 +176,19 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
     />
     <InputWithError
       input={
+        <input
+          autoComplete="email"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          required={true}
+          type="email"
+          value=""
+        />
+      }
+    />
+    <InputWithError
+      input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
@@ -276,19 +289,6 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
             />
           </usePasswordInput__Button>
         </usePasswordInput__Container>
-      }
-    />
-    <InputWithError
-      input={
-        <input
-          autoComplete="email"
-          name="email"
-          onChange={[Function]}
-          placeholder="email"
-          required={true}
-          type="email"
-          value=""
-        />
       }
     />
     <button
@@ -330,6 +330,20 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      error="Email is already taken."
+      input={
+        <input
+          autoComplete="email"
+          name="email"
+          onChange={[Function]}
+          placeholder="email"
+          required={true}
+          type="email"
+          value=""
+        />
+      }
+    />
+    <InputWithError
       error="Password must be between 10 and 20 characters."
       input={
         <usePasswordInput__Container>
@@ -433,20 +447,6 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
             />
           </usePasswordInput__Button>
         </usePasswordInput__Container>
-      }
-    />
-    <InputWithError
-      error="Email is already taken."
-      input={
-        <input
-          autoComplete="email"
-          name="email"
-          onChange={[Function]}
-          placeholder="email"
-          required={true}
-          type="email"
-          value=""
-        />
       }
     />
     <button

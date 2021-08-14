@@ -39,9 +39,9 @@ const Register = () => {
             {pageIndex == 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
                     <InputWithError input={usernameInput} error={error?.username}/>
+                    <InputWithError input={emailInput} error={error?.email}/>
                     <InputWithError input={passwordInput} error={error?.password}/>
                     <InputWithError input={repeatPasswordInput} error={error?.password}/>
-                    <InputWithError input={emailInput} error={error?.email}/>
                     <button type='submit'>next</button>
                     <span>Already have an account?<Link href='/login'> Log in.</Link></span>
                 </form> :
