@@ -30,11 +30,14 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
     "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "jsdom": "^17.0.0",
+    "jsdom-global": "^3.0.2"
   },
   "jest": {
     "setupFiles": [
-        "<rootDir>/src/setupTests.js"
-    ]
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testEnvironment": "jsdom"
   }
 }
