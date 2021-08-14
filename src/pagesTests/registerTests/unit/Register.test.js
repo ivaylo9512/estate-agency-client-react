@@ -29,7 +29,7 @@ describe('unit tests for Register', () =>{
         expect(inputs.at(0).prop('input').props.name).toBe('username');
         expect(inputs.at(1).prop('input').props.name).toBe('email');
         expect(inputs.at(2).prop('input').props.children[0].props.name).toBe('password');
-        expect(inputs.at(3).prop('input').props.children[0].props.name).toBe('repeat-password');
+        expect(inputs.at(3).prop('input').props.children[0].props.name).toBe('repeatPassword');
     })
 
     it('should render inputs with page 1', () => {
@@ -62,7 +62,7 @@ describe('unit tests for Register', () =>{
         expect(inputs.at(0).prop('input').props.name).toBe('username');
         expect(inputs.at(1).prop('input').props.name).toBe('email');
         expect(inputs.at(2).prop('input').props.children[0].props.name).toBe('password');
-        expect(inputs.at(3).prop('input').props.children[0].props.name).toBe('repeat-password');
+        expect(inputs.at(3).prop('input').props.children[0].props.name).toBe('repeatPassword');
     })
 
     it('should render with passed error props with page 0', () => {
