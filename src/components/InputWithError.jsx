@@ -4,7 +4,7 @@ const InputWithError = ({error, classname = '', input}) => {
         <div className={(error ? 'error ' : '') + classname}>
             {input}
             {error && 
-                <div>
+                <div data-testid={getId(input) + 'Error'}>
                     {error}
                 </div>
             }

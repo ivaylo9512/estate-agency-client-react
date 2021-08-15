@@ -10,12 +10,12 @@ const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)
     const [registerValues, { usernameInput, passwordInput, repeatPasswordInput, nameInput, emailInput, descriptionInput, locationInput }] = createFields(); 
     
-    const {isLoading, error} = useSelector(getRegisterRequest)
+    const {isLoading, error} = useSelector(getRegisterRequest);
     const dispatch = useDispatch();
     
     const setPage = (e, page) => {
-        e.preventDefault()
-        setPageIndex(page)
+        e.preventDefault();
+        setPageIndex(page);
     }
     
     
@@ -23,7 +23,7 @@ const Register = () => {
         e.preventDefault();
         const {repeatPassword, ...registerObject} = registerValues;
 
-        dispatch(registerRequest(registerObject))
+        dispatch(registerRequest(registerObject));
     }
 
     useEffect(() => {
@@ -38,17 +38,17 @@ const Register = () => {
         <section>
             {pageIndex == 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
-                    <InputWithError input={usernameInput} error={error?.username}/>
-                    <InputWithError input={emailInput} error={error?.email}/>
-                    <InputWithError input={passwordInput} error={error?.password}/>
-                    <InputWithError input={repeatPasswordInput} error={error?.password}/>
+                    <InputWithError data-testid={getId(usernameInput)} input={usernameInput} error={error?.username}/>
+                    <InputWithError data-testid={getId(emailInput)} input={emailInput} error={error?.email}/>
+                    <InputWithError data-testid={getId(passwordInput)} input={passwordInput} error={error?.password}/>
+                    <InputWithError data-testid={getId(repeatPasswordInput)} input={repeatPasswordInput} error={error?.password}/>
                     <button type='submit'>next</button>
                     <span>Already have an account?<Link href='/login'> Log in.</Link></span>
                 </form> :
                 <form onSubmit={register}>
-                    <InputWithError input={nameInput} error={error?.name}/>
-                    <InputWithError input={locationInput} error={error?.location}/>
-                    <InputWithError input={descriptionInput} error={error?.description}/>
+                    <InputWithError data-testid={getId(nameInput)} input={nameInput} error={error?.name}/>
+                    <InputWithError data-testid={getId(locationInput)} input={locationInput} error={error?.location}/>
+                    <InputWithError data-testid={getId(descriptionInput)} input={descriptionInput} error={error?.description}/>
                     <button onClick={(e) => setPage(e, 0)} >back</button>
                     <button>register</button>
                 </form>
@@ -62,6 +62,7 @@ const createFields = () => {
         name: 'username',
         placeholder: 'username',
         autoComplete: 'username',
+        testid: 'username',
         validationRules: {
             required: true, 
             minLength: 8, 
@@ -74,6 +75,7 @@ const createFields = () => {
         type: 'password',
         autoComplete: 'new-password',
         placeholder: 'password',
+        testid: 'password',
         validationRules: {
             minLength: 10,
             maxLength: 22,
@@ -84,6 +86,7 @@ const createFields = () => {
     const [repeatPassword, repeatPasswordInput] = usePasswordInput({
         name: 'repeatPassword',
         type: 'password',
+        testid: 'repeatPassword',
         autoComplete: 'new-password',
         placeholder: 'repeat',
         validationRules:{
@@ -96,6 +99,7 @@ const createFields = () => {
     const [name, nameInput] = useInput({
         placeholder: 'name' , 
         name: 'name', 
+        testid: 'name',
         validationRules: {
             required: true
         } 
@@ -105,6 +109,7 @@ const createFields = () => {
         type: 'email',
         placeholder: 'email',
         name: 'email',
+        testid: 'email',
         autoComplete: 'email',
         validationRules: {
             required: true
@@ -114,6 +119,7 @@ const createFields = () => {
     const [location, locationInput] = useInput({
         placeholder: 'location',
         name: 'location',
+        testid: 'location',
         validationRules: {
             required: true
         } 
@@ -122,6 +128,7 @@ const createFields = () => {
     const [description, descriptionInput] = useInput({
         placeholder: 'description',
         name: 'description',
+        testid: 'description',
         validationRules: {
             required: true
         } 

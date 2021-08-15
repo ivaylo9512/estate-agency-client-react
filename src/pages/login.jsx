@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const Login = () => {
     const [{usernameOrEmail, password}, {usernameOrEmailInput, passwordInput}] = useCreateInputs();
     const dispatch = useDispatch();
-    const {isLoading, error} = useSelector(getLoginRequest)
+    const {isLoading, error} = useSelector(getLoginRequest);
 
     const login = (e) => {
         e.preventDefault();
@@ -45,13 +45,17 @@ export default Login
 const useCreateInputs = () => {
     const [usernameOrEmail, usernameOrEmailInput] = useInput({
         placeholder: 'username or email', 
-        name: 'username'
+        name: 'username',
+        testid: 'username'
     });
+    
     const [password, passwordInput] = usePasswordInput({
         placeholder: 'password', 
         name: 'password', 
         type: 'password',
+        testid: 'password',
         autoComplete: 'current-password',
     });
+
     return [{usernameOrEmail, password}, {usernameOrEmailInput, passwordInput}]
 }
