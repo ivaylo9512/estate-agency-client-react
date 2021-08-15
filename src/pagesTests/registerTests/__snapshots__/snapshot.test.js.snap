@@ -6,10 +6,11 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="usernameContainer"
       input={
         <input
           autoComplete="username"
-          id="username"
+          data-testid="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -22,10 +23,11 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="emailContainer"
       input={
         <input
           autoComplete="email"
-          id="email"
+          data-testid="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -36,11 +38,12 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="passwordContainer"
       input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            id="password"
+            data-testid="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -90,11 +93,12 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="repeatPasswordContainer"
       input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            id="repeatPassword"
+            data-testid="repeatPassword"
             name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
@@ -164,15 +168,13 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="nameContainer"
       input={
         <input
-          autoComplete="username"
-          id="username"
-          maxLength={20}
-          minLength={8}
-          name="username"
+          data-testid="name"
+          name="name"
           onChange={[Function]}
-          placeholder="username"
+          placeholder="name"
           required={true}
           type=""
           value=""
@@ -180,138 +182,41 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       }
     />
     <InputWithError
+      data-testid="locationContainer"
       input={
         <input
-          autoComplete="email"
-          id="email"
-          name="email"
+          data-testid="location"
+          name="location"
           onChange={[Function]}
-          placeholder="email"
+          placeholder="location"
           required={true}
-          type="email"
+          type=""
           value=""
         />
       }
     />
     <InputWithError
+      data-testid="descriptionContainer"
       input={
-        <usePasswordInput__Container>
-          <input
-            autoComplete="new-password"
-            id="password"
-            maxLength={22}
-            minLength={10}
-            name="password"
-            onChange={[Function]}
-            placeholder="password"
-            required={true}
-            type="password"
-            value=""
-          />
-          <usePasswordInput__Button
-            onClick={[Function]}
-            type="button"
-          >
-            <FontAwesomeIcon
-              border={false}
-              className=""
-              fixedWidth={false}
-              flip={null}
-              icon={
-                Object {
-                  "icon": Array [
-                    576,
-                    512,
-                    Array [],
-                    "f06e",
-                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
-                  ],
-                  "iconName": "eye",
-                  "prefix": "fas",
-                }
-              }
-              inverse={false}
-              listItem={false}
-              mask={null}
-              pull={null}
-              pulse={false}
-              rotation={null}
-              size={null}
-              spin={false}
-              swapOpacity={false}
-              symbol={false}
-              title=""
-              transform={null}
-            />
-          </usePasswordInput__Button>
-        </usePasswordInput__Container>
-      }
-    />
-    <InputWithError
-      input={
-        <usePasswordInput__Container>
-          <input
-            autoComplete="new-password"
-            id="repeatPassword"
-            name="repeatPassword"
-            onChange={[Function]}
-            placeholder="repeat"
-            required={true}
-            type="password"
-            value=""
-          />
-          <usePasswordInput__Button
-            onClick={[Function]}
-            type="button"
-          >
-            <FontAwesomeIcon
-              border={false}
-              className=""
-              fixedWidth={false}
-              flip={null}
-              icon={
-                Object {
-                  "icon": Array [
-                    576,
-                    512,
-                    Array [],
-                    "f06e",
-                    "M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z",
-                  ],
-                  "iconName": "eye",
-                  "prefix": "fas",
-                }
-              }
-              inverse={false}
-              listItem={false}
-              mask={null}
-              pull={null}
-              pulse={false}
-              rotation={null}
-              size={null}
-              spin={false}
-              swapOpacity={false}
-              symbol={false}
-              title=""
-              transform={null}
-            />
-          </usePasswordInput__Button>
-        </usePasswordInput__Container>
+        <input
+          data-testid="description"
+          name="description"
+          onChange={[Function]}
+          placeholder="description"
+          required={true}
+          type=""
+          value=""
+        />
       }
     />
     <button
-      type="submit"
+      onClick={[Function]}
     >
-      next
+      back
     </button>
-    <span>
-      Already have an account?
-      <Link
-        href="/login"
-      >
-         Log in.
-      </Link>
-    </span>
+    <button>
+      register
+    </button>
   </form>
 </section>
 `;
@@ -322,11 +227,12 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="usernameContainer"
       error="Username is already taken."
       input={
         <input
           autoComplete="username"
-          id="username"
+          data-testid="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -339,11 +245,12 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      data-testid="emailContainer"
       error="Email is already taken."
       input={
         <input
           autoComplete="email"
-          id="email"
+          data-testid="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -354,12 +261,13 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      data-testid="passwordContainer"
       error="Password must be between 10 and 20 characters."
       input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            id="password"
+            data-testid="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -409,12 +317,13 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      data-testid="repeatPasswordContainer"
       error="Password must be between 10 and 20 characters."
       input={
         <usePasswordInput__Container>
           <input
             autoComplete="new-password"
-            id="repeatPassword"
+            data-testid="repeatPassword"
             name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
@@ -484,10 +393,11 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="nameContainer"
       error="Name is required."
       input={
         <input
-          id="name"
+          data-testid="name"
           name="name"
           onChange={[Function]}
           placeholder="name"
@@ -498,10 +408,11 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      data-testid="locationContainer"
       error="location is required."
       input={
         <input
-          id="location"
+          data-testid="location"
           name="location"
           onChange={[Function]}
           placeholder="location"
@@ -512,10 +423,11 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <InputWithError
+      data-testid="descriptionContainer"
       error="Description is required."
       input={
         <input
-          id="description"
+          data-testid="description"
           name="description"
           onChange={[Function]}
           placeholder="description"

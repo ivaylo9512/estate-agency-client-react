@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Register from '../../../pages/register';
+import Register from '../../pages/register';
 import { configureStore } from '@reduxjs/toolkit';
-import authenticate, { registerRequest } from '../../../app/slices/authenticate'
+import authenticate, { registerRequest } from '../../app/slices/authenticate'
 import * as Redux from 'react-redux';
 
 const { Provider } = Redux;

@@ -22,7 +22,7 @@ describe("Login snapshot tests", () => {
         expect(toJson(wrapper)).toMatchSnapshot();
     });
 
-    it('renders correctly with passed errors props and page 0', () => {
+    it('renders correctly with passed errors props', () => {
         const wrapper = createWrapper({isLoading: false, error: 'Bad credentials.'});
 
         expect(toJson(wrapper)).toMatchSnapshot();

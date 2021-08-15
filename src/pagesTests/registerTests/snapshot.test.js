@@ -1,15 +1,15 @@
 import React from 'react';
-import Register from '../../../pages/register';
+import Register from '../../pages/register';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import { getRegisterRequest } from '../../../app/slices/authenticate';
+import { getRegisterRequest } from '../../app/slices/authenticate';
 
 jest.mock('react-redux', () => ({
     useSelector: jest.fn(fn => fn()),
     useDispatch: () => jest.fn(),
 }));
 
-jest.mock('../../../app/slices/authenticate');
+jest.mock('../../app/slices/authenticate');
 
 const createWrapper = (value) => {
     getRegisterRequest.mockReturnValue(value);
@@ -25,7 +25,7 @@ describe('RegisterSnapshotTests', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
 
         const form = wrapper.find('form');
-        form.simulate('submite', { target: form, preventDefault: jest.fn() });
+        form.simulate('submit', { target: form, preventDefault: jest.fn() });
 
         expect(toJson(wrapper)).toMatchSnapshot();
     })
