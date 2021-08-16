@@ -60,7 +60,9 @@ exports[`Login snapshot tests renders correctly 1`] = `
         />
       </usePasswordInput__Button>
     </usePasswordInput__Container>
-    <span>
+    <span
+      data-testid="redirect"
+    >
       Don't have an account?
       <Link
         href="/register"
@@ -68,7 +70,9 @@ exports[`Login snapshot tests renders correctly 1`] = `
          Sign up.
       </Link>
     </span>
-    <button>
+    <button
+      data-testid="login"
+    >
       login
     </button>
   </form>
@@ -137,10 +141,13 @@ exports[`Login snapshot tests renders correctly with passed errors props 1`] = `
     </usePasswordInput__Container>
     <div
       className="errors"
+      data-testid="error"
     >
       Bad credentials.
     </div>
-    <span>
+    <span
+      data-testid="redirect"
+    >
       Don't have an account?
       <Link
         href="/register"
@@ -148,7 +155,9 @@ exports[`Login snapshot tests renders correctly with passed errors props 1`] = `
          Sign up.
       </Link>
     </span>
-    <button>
+    <button
+      data-testid="login"
+    >
       login
     </button>
   </form>

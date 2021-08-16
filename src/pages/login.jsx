@@ -29,13 +29,13 @@ const Login = () => {
                 {passwordInput}
                 
                 {error &&
-                    <div className='errors'>
+                    <div data-testid='error' className='errors'>
                         {error}
                     </div>
                 }
 
-                <span>Don't have an account?<Link href="/register"> Sign up.</Link></span>
-                <button>login</button>
+                <span data-testid='redirect'>Don't have an account?<Link href="/register"> Sign up.</Link></span>
+                <button data-testid='login'>login</button>
             </form>
         </section>
     )
