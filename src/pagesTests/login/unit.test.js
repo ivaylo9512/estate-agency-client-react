@@ -1,7 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Login from '../../pages/login';
-import { getLoginRequest } from '../../app/slices/authenticate';
+import * as Redux from 'react-redux';
+import { getLoginRequest, loginRequest } from '../../app/slices/authenticate';
+import Link from 'next/link';
 
 jest.mock('react-redux', () => ({
     useSelector: jest.fn(fn => fn()),
@@ -27,6 +29,20 @@ describe('Login unit tests', () => {
         expect(wrapper.findByTestid('password').length).toBe(1); 
     })
 
+    it('should call dispatch login with input values', () => {
+        const mockDispatch = jest.fn();
+        const spy = jest.spyOn(Redux, 'useDispatch');
+        spy.mockReturnValue(mockDispatch);
+
+        const wrapper = createWrapper({ isLoading: false, error: null});
+
+        wrapper.findByTestid('username').simulate('change', { target: { value: 'username'} });
+        wrapper.findByTestid('password').simulate('change', { target: { value: 'password'} });
+        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+
+        expect(mockDispatch).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
+    })
+
     it('should render error', () => {
         const wrapper = createWrapper({ isLoading: false, error: 'Bad credentials.' });
 
@@ -42,5 +58,20 @@ describe('Login unit tests', () => {
         expect(wrapper.findByTestid('username').prop('value')).toBe('username'); 
         expect(wrapper.findByTestid('password').prop('value')).toBe('password'); 
 
+    })
+
+    it('should render button', () => {
+        const wrapper = createWrapper({ isLoading: false, error: null });
+
+        expect(wrapper.findByTestid('login').length).toBe(1); 
+        expect(wrapper.findByTestid('login').prop('type')).toBe('submit');
+    })
+
+    it('should render redirect', () => {
+        const wrapper = createWrapper({ isLoading: false, error: null });
+        const redirect = wrapper.findByTestid('redirect');
+
+        expect(redirect.find(Link).prop('href')).toBe('/register');
+        expect(redirect.text()).toBe(`Don't have an account?<Link />`);
     })
 })

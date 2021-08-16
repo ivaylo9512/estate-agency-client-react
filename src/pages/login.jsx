@@ -35,7 +35,7 @@ const Login = () => {
                 }
 
                 <span data-testid='redirect'>Don't have an account?<Link href="/register"> Sign up.</Link></span>
-                <button data-testid='login'>login</button>
+                <button data-testid='login' type='submit'>login</button>
             </form>
         </section>
     )

@@ -72,6 +72,7 @@ exports[`Login snapshot tests renders correctly 1`] = `
     </span>
     <button
       data-testid="login"
+      type="submit"
     >
       login
     </button>
@@ -157,6 +158,7 @@ exports[`Login snapshot tests renders correctly with passed errors props 1`] = `
     </span>
     <button
       data-testid="login"
+      type="submit"
     >
       login
     </button>
