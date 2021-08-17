@@ -2,24 +2,28 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Login from '../../pages/login';
 import * as Redux from 'react-redux';
-import { getLoginRequest, loginRequest } from '../../app/slices/authenticate';
+import { loginRequest } from '../../app/slices/authenticate';
 import Link from 'next/link';
-
-jest.mock('react-redux', () => ({
-    useSelector: jest.fn(fn => fn()),
-    useDispatch: jest.fn()
-}))
-
-jest.mock('../../app/slices/authenticate');
-
-const createWrapper = (value) => {
-    getLoginRequest.mockReturnValue(value);
-    return shallow(
-        <Login />
-    )
-}
+import * as redux from 'react-redux';
 
 describe('Login unit tests', () => {
+    let selectorSpy;
+    let dispatchSpy;
+
+    beforeAll(() => {
+        selectorSpy = jest.spyOn(redux, 'useSelector');
+    
+        dispatchSpy = jest.spyOn(redux, 'useDispatch');
+        dispatchSpy.mockReturnValue(jest.fn());
+    });
+
+    const createWrapper = (state) => {
+        selectorSpy.mockReturnValue(state);
+        return shallow(
+            <Login />
+        )
+    }
+
     it('should render inputs', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
 

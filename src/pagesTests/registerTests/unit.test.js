@@ -1,23 +1,27 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Register from '../../pages/register';
-import { getRegisterRequest } from '../../app/slices/authenticate';
 import InputWithError from '../../components/InputWithError';
 import Link from 'next/link';
+import * as redux from 'react-redux';
 
-jest.mock('react-redux', () => ({
-    useSelector: jest.fn(fn => fn()),
-    useDispatch: jest.fn()
-}));
+describe('unit tests for Register', () => {
+    let selectorSpy;
+    let dispatchSpy;
 
-jest.mock('../../app/slices/authenticate');
+    beforeAll(() => {
+        selectorSpy = jest.spyOn(redux, 'useSelector');
+        dispatchSpy = jest.spyOn(redux, 'useDispatch');
 
-const createWrapper = (value) => {
-    getRegisterRequest.mockReturnValue(value);
-    return shallow(<Register />)
-}
-
-describe('unit tests for Register', () =>{
+        dispatchSpy.mockReturnValue(jest.fn());
+    })
+    const createWrapper = (state) => {
+        selectorSpy.mockReturnValue(state);
+        
+        return shallow(
+            <Register /> 
+        )
+    }
 
     it('should render inputs, with page 0', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
@@ -85,10 +89,7 @@ describe('unit tests for Register', () =>{
     it('should render redirect', () => {
         const wrapper = createWrapper({ isLoading: false, error: null })
 
-        const span = wrapper.find('span');
-        const link = wrapper.find(Link);
-
-        expect(span.text()).toBe('Already have an account?<Link />');
-        expect(link.prop('href')).toBe('/login')
+        expect(wrapper.find('span').text()).toBe('Already have an account?<Link />');
+        expect(wrapper.find(Link).prop('href')).toBe('/login')
     })
 });
