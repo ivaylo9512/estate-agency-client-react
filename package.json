@@ -14,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@reduxjs/toolkit": "^1.6.1",
+    "isomorphic-fetch": "^3.0.0",
     "jest": "^27.0.6",
     "next": "11.0.1",
     "react": "17.0.2",
@@ -38,6 +39,9 @@
     "setupFiles": [
       "<rootDir>/src/setupTests.js"
     ],
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
