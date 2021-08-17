@@ -141,7 +141,6 @@ exports[`Login snapshot tests renders correctly with passed errors props 1`] = `
       </usePasswordInput__Button>
     </usePasswordInput__Container>
     <div
-      className="errors"
       data-testid="error"
     >
       Bad credentials.
