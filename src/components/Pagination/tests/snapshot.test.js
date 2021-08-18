@@ -14,26 +14,32 @@ describe('Pagination snpashot tests', () => {
     const createWrapper = (state) => {
         selectorMock.mockReturnValue(state);
 
-        return shallow(<Pagination data={[]} />)
+        return shallow(<Pagination getProperties={jest.fn()}/>)
     }
 
     it('renders correctly with pages', () => {
-        const wrapper = createWrapper({ data: { maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly without pages', () => {
-        const wrapper = createWrapper({ data: { maxPages: 0, isLoading: false}, query: { name: '', take: '10'}});
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 0, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with pages and back button', () => {
-        const wrapper = createWrapper({ data: { maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(1).simulate('click');
+        const wrapper = createWrapper({ data: {properties: [],  maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
+        wrapper.findByTestid('2').simulate('click');
 
         expect(wrapper).toMatchSnapshot();
     })
 
+    it('renders correctly with pages at last page', () => {
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
+        wrapper.findByTestid(5).simulate('click');
+
+        expect(wrapper).toMatchSnapshot();
+    })
 })
