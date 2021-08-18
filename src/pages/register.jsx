@@ -1,10 +1,10 @@
-import useInput from '../hooks/useInput';
+import useInput, { getId } from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerRequest, getRegisterRequest } from '../app/slices/authenticate';
 import Link from 'next/link';
-import InputWithError from '../components/InputWithError';
+import InputWithError, { getContainerId } from '../components/InputWithError';
 
 const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)
@@ -38,19 +38,19 @@ const Register = () => {
         <section>
             {pageIndex == 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
-                    <InputWithError data-testid={getId(usernameInput)} input={usernameInput} error={error?.username}/>
-                    <InputWithError data-testid={getId(emailInput)} input={emailInput} error={error?.email}/>
-                    <InputWithError data-testid={getId(passwordInput)} input={passwordInput} error={error?.password}/>
-                    <InputWithError data-testid={getId(repeatPasswordInput)} input={repeatPasswordInput} error={error?.password}/>
-                    <button type='submit'>next</button>
-                    <span>Already have an account?<Link href='/login'> Log in.</Link></span>
+                    <InputWithError data-testid={getContainerId(usernameInput)} input={usernameInput} error={error?.username}/>
+                    <InputWithError data-testid={getContainerId(emailInput)} input={emailInput} error={error?.email}/>
+                    <InputWithError data-testid={getContainerId(passwordInput)} input={passwordInput} error={error?.password}/>
+                    <InputWithError data-testid={getContainerId(repeatPasswordInput)} input={repeatPasswordInput} error={error?.password}/>
+                    <button data-testid='next' type='submit'>next</button>
+                    <span data-testid='redirect'>Already have an account?<Link href='/login'> Log in.</Link></span>
                 </form> :
                 <form onSubmit={register}>
-                    <InputWithError data-testid={getId(nameInput)} input={nameInput} error={error?.name}/>
-                    <InputWithError data-testid={getId(locationInput)} input={locationInput} error={error?.location}/>
-                    <InputWithError data-testid={getId(descriptionInput)} input={descriptionInput} error={error?.description}/>
-                    <button onClick={(e) => setPage(e, 0)} >back</button>
-                    <button>register</button>
+                    <InputWithError data-testid={getContainerId(nameInput)} input={nameInput} error={error?.name}/>
+                    <InputWithError data-testid={getContainerId(locationInput)} input={locationInput} error={error?.location}/>
+                    <InputWithError data-testid={getContainerId(descriptionInput)} input={descriptionInput} error={error?.description}/>
+                    <button data-testid='back' onClick={(e) => setPage(e, 0)} >back</button>
+                    <button data-testid='register' type='submit'>register</button>
                 </form>
             }
         </section>

@@ -2,11 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
-const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) => {
+const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pagesPerSlide = 4}) => {
     const {data: { properties, maxPages, isLoading }, query } = useSelector(selector);
 
     const [page, setPage] = useState(1);
-    const [pages, setPages] = useState(5);
     const dispatch = useDispatch();
 
     const changePage = (nextPage) => {
@@ -37,9 +36,9 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties}) =
                 }
                 <ul>
                     {
-                        Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
-                            const slide = Math.floor(page / pages);
-                            let pageIndex = slide * pages + i;
+                        Array.from({length: page / pagesPerSlide < 1 ? pagesPerSlide : pagesPerSlide + 1 }).map((el, i) => {
+                            const slide = Math.floor(page / pagesPerSlide);
+                            let pageIndex = slide * pagesPerSlide + i;
                             pageIndex += slide == 0 ? 1 : 0;
 
                             if(pageIndex <= maxPages){

@@ -27,13 +27,11 @@ const Login = () => {
             <form onSubmit={login}>
                 {usernameOrEmailInput}
                 {passwordInput}
-                
                 {error &&
-                    <div data-testid='error' className='errors'>
+                    <div data-testid='error'>
                         {error}
                     </div>
                 }
-
                 <span data-testid='redirect'>Don't have an account?<Link href="/register"> Sign up.</Link></span>
                 <button data-testid='login' type='submit'>login</button>
             </form>

@@ -14,7 +14,7 @@ describe('Pagination snpashot tests', () => {
     const createWrapper = (state) => {
         selectorMock.mockReturnValue(state);
 
-        return shallow(<Pagination getProperties={jest.fn()}/>)
+        return shallow(<Pagination getProperties={jest.fn()} pagesPerSlide={5}/>)
     }
 
     it('renders correctly with pages', () => {
