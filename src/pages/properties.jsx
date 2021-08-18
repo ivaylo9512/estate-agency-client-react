@@ -7,6 +7,7 @@ const Properties = () => {
         <section>
             <PropertiesSearchForm />
             <PropertiesList />
+            <PropertiesPagination selector={getPropertiesState} setCurrentProperties={setCurrentProperties} getProperties={getProperties} />
         </section>
     )
 }
