@@ -1,5 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Pagination snpashot tests renders correctly with page that is last page of slide should render next slide 1`] = `
+<Fragment>
+   
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      prev
+    </button>
+    <ul>
+      <li
+        data-testid="5"
+        isSelected={true}
+        key="5"
+        onClick={[Function]}
+      >
+        5
+      </li>
+      <li
+        data-testid="6"
+        isSelected={false}
+        key="6"
+        onClick={[Function]}
+      >
+        6
+      </li>
+      <li
+        data-testid="7"
+        isSelected={false}
+        key="7"
+        onClick={[Function]}
+      >
+        7
+      </li>
+      <li
+        data-testid="8"
+        isSelected={false}
+        key="8"
+        onClick={[Function]}
+      >
+        8
+      </li>
+      <li
+        data-testid="9"
+        isSelected={false}
+        key="9"
+        onClick={[Function]}
+      >
+        9
+      </li>
+      <li
+        data-testid="10"
+        isSelected={false}
+        key="10"
+        onClick={[Function]}
+      >
+        10
+      </li>
+    </ul>
+    <button
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </div>
+   
+</Fragment>
+`;
+
 exports[`Pagination snpashot tests renders correctly with pages 1`] = `
 <Fragment>
    
@@ -56,7 +125,55 @@ exports[`Pagination snpashot tests renders correctly with pages 1`] = `
 </Fragment>
 `;
 
-exports[`Pagination snpashot tests renders correctly with pages and back button 1`] = `
+exports[`Pagination snpashot tests renders correctly with pages at last page 1`] = `
+<Fragment>
+   
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      prev
+    </button>
+    <ul>
+      <li
+        data-testid="1"
+        isSelected={false}
+        key="1"
+        onClick={[Function]}
+      >
+        1
+      </li>
+      <li
+        data-testid="2"
+        isSelected={false}
+        key="2"
+        onClick={[Function]}
+      >
+        2
+      </li>
+      <li
+        data-testid="3"
+        isSelected={false}
+        key="3"
+        onClick={[Function]}
+      >
+        3
+      </li>
+      <li
+        data-testid="4"
+        isSelected={true}
+        key="4"
+        onClick={[Function]}
+      >
+        4
+      </li>
+    </ul>
+  </div>
+   
+</Fragment>
+`;
+
+exports[`Pagination snpashot tests renders correctly with pages at page 2 and back button 1`] = `
 <Fragment>
    
   <div>
@@ -112,30 +229,6 @@ exports[`Pagination snpashot tests renders correctly with pages and back button 
     >
       next
     </button>
-  </div>
-   
-</Fragment>
-`;
-
-exports[`Pagination snpashot tests renders correctly with pages at last page 1`] = `
-<Fragment>
-   
-  <div>
-    <button
-      onClick={[Function]}
-    >
-      prev
-    </button>
-    <ul>
-      <li
-        data-testid="5"
-        isSelected={true}
-        key="5"
-        onClick={[Function]}
-      >
-        5
-      </li>
-    </ul>
   </div>
    
 </Fragment>

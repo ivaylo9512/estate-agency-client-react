@@ -6,7 +6,7 @@ import * as redux from 'react-redux';
 describe('Pagination snpashot tests', () => {
     let selectorMock;
 
-    beforeAll(() => {
+    beforeEach(() => {
         selectorMock = jest.spyOn(redux, 'useSelector');
         jest.spyOn(redux, 'useDispatch').mockReturnValue(jest.fn());
     })
@@ -29,16 +29,23 @@ describe('Pagination snpashot tests', () => {
         expect(wrapper).toMatchSnapshot();
     })
 
-    it('renders correctly with pages and back button', () => {
-        const wrapper = createWrapper({ data: {properties: [],  maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid('2').simulate('click');
+    it('renders correctly with pages at page 2 and back button', () => {
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
+        wrapper.findByTestid(2).simulate('click');
+
+        expect(wrapper).toMatchSnapshot();
+    })
+
+    it('renders correctly with page that is last page of slide should render next slide', () => {
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 10, isLoading: false}, query: { name: '', take: '10'}});
+        wrapper.findByTestid(5).simulate('click');
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with pages at last page', () => {
-        const wrapper = createWrapper({ data: { properties: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(5).simulate('click');
+        const wrapper = createWrapper({ data: { properties: [], maxPages: 4, isLoading: false}, query: { name: '', take: '10'}});
+        wrapper.findByTestid(4).simulate('click');
 
         expect(wrapper).toMatchSnapshot();
     })
