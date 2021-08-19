@@ -32,7 +32,7 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pa
         <> {maxPages > 0 &&
             <div>
                 {page > 1 &&
-                    <button onClick={() => changePage(page - 1)}>prev</button>
+                    <button data-testid='back' onClick={() => changePage(page - 1)}>prev</button>
                 }
                 <ul>
                     {
@@ -48,7 +48,7 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pa
                     }
                 </ul>
                 {page < maxPages &&
-                    <button onClick={() => changePage(page + 1)}>next</button>
+                    <button data-testid='next' onClick={() => changePage(page + 1)}>next</button>
                 }
             </div>
         } </>

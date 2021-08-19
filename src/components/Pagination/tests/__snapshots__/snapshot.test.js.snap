@@ -5,6 +5,7 @@ exports[`Pagination snpashot tests renders correctly with page that is last page
    
   <div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -60,6 +61,7 @@ exports[`Pagination snpashot tests renders correctly with page that is last page
       </li>
     </ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
@@ -116,6 +118,7 @@ exports[`Pagination snpashot tests renders correctly with pages 1`] = `
       </li>
     </ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
@@ -130,6 +133,7 @@ exports[`Pagination snpashot tests renders correctly with pages at last page 1`]
    
   <div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -178,6 +182,7 @@ exports[`Pagination snpashot tests renders correctly with pages at page 2 and ba
    
   <div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -225,6 +230,7 @@ exports[`Pagination snpashot tests renders correctly with pages at page 2 and ba
       </li>
     </ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
