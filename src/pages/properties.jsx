@@ -1,5 +1,7 @@
 import PropertiesSearchForm from "../components/PropertiesSearchForm"
-import PropertiesList from "../components/PropertiesList";
+import PropertiesList from "components/PropertiesList";
+import PropertiesPagination from "components/Pagination/PropertiesPagination";
+import { getProperties, getPropertiesState, setCurrentProperties } from "app/slices/propertiesPaginationSlice"
 
 const Properties = () => {
 
