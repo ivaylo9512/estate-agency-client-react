@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import authenticate from './slices/authenticate';
 import propertiesPagination from './slices/propertiesPaginationSlice';
 import createProperty from './slices/createPropertySlice';

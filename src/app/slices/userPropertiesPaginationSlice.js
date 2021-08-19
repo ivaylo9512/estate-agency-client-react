@@ -2,9 +2,9 @@ const { createSlice } = require("@reduxjs/toolkit")
 
 const initialState = {
     data:{
-        length: 0,
-        properties: [],
         pages: 0,
+        maxPages: 0,
+        properties: [],
         lastProperty: null,
         isLoading: false,
         isInitial: true,
@@ -27,14 +27,14 @@ const userPropertiesPaginationSilce = createSlice({
             state.data = initialState.data
             state.query = initialState.query;
         },
-        onUserPropertiesComplete(state, {payload: {data, query}}){
+        onUserPropertiesComplete(state, {payload: {pageable, query}}){
             state.error = null
             state.query = query;
-            state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
-            state.data.length = state.data.length + data.length;
-            state.data.lastProperty = data.lastProperty;
-            state.data.properties = [...state.data.properties, ...data.properties];
-            state.data.currentProperties = data.properties[data.properties.length - 1]
+            state.data.maxPages = state.data.pages + pageable.pages;
+            state.data.pages = state.data.pages + pageable.data.length;
+            state.data.lastProperty = pageable.lastProperty;
+            state.data.properties = [...state.data.properties, ...pageable.data];
+            state.data.currentProperties = pageable.data[pageable.data.length - 1]
             state.data.isLoading = false;
             state.data.isInitial = false;
         },

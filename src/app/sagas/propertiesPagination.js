@@ -12,14 +12,14 @@ function* getProperties({payload: query}) {
     const response = yield fetch(`${BASE_URL}/properties/findByWithPage/${takeAmount}/${location.replace(/[\\?%#/'"]/g, '')}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
     
     if(response.ok){
-        const data = yield response.json();
+        const pageable = yield response.json();
 
-        data.length = data.properties.length;
-        data.lastProperty = data.properties[data.properties.length - 1];
-        data.properties = splitArray(data, take)
+        pageable.lastProperty = pageable.data[pageable.data.length - 1];
+        pageable.pages = Math.ceil(pageable.count / query.take);
+        pageable.data = splitArray(pageable.data, query.take);
 
         yield put(onPropertiesComplete({
-            data,
+            pageable,
             query
         }))
     }else{

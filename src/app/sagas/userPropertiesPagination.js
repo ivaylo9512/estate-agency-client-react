@@ -14,15 +14,14 @@ function* getProperties({payload: query}) {
         }
     })
     if(response.ok){
-        const data = yield response.json();
+        const pageable = yield response.json();
 
-
-        data.length = data.properties.length;
-        data.lastProperty = data.properties[data.properties.length - 1]
-        data.properties = splitArray(data, take)
+        pageable.pages = Math.ceil(pageable.count / query.take);
+        pageable.lastProperty = pageable.data[pageable.data.length - 1];
+        pageable.data = splitArray(pageable.data, query.take);
     
         yield put(onUserPropertiesComplete({
-            data,
+            pageable,
             query
         }))        
     }else{

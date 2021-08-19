@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pagesPerSlide = 4}) => {
-    const {data: { properties, maxPages, isLoading }, query } = useSelector(selector);
+    const {data: { properties, maxPages, pages, isLoading }, query } = useSelector(selector);
 
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
@@ -19,8 +19,8 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pa
             return setPage(nextPage);
         }
 
-        const pages = nextPage - page; 
-        dispatch(getProperties({...query, pages}))
+        const pagesCount = nextPage - pages; 
+        dispatch(getProperties({...query, pages: pagesCount}))
         setPage(nextPage)
     }
 
