@@ -7,6 +7,8 @@ import * as Redux from 'react-redux';
 import createSaga from 'redux-saga';
 import registerWatcher from '../../app/sagas/register';
 import 'isomorphic-fetch';
+import { act } from 'react-dom/test-utils';
+import Router from 'next/router';
 
 const { Provider } = Redux;
 
@@ -34,7 +36,7 @@ const createWrapper = () => {
     )
 }
 
-const user = { username: 'username', email: 'email@gmail.com', password: 'password', name: 'name', location: 'location', description: 'description' };
+const user = { username: 'username', password: 'password', name: 'name', email: 'email@gmail.com', location: 'location', description: 'description' };
 
 const changeFirstPageInputs = (wrapper) => {
     let inputs = wrapper.find('input');
@@ -58,6 +60,11 @@ const changeSecondPageInputs = (wrapper) => {
 }
 
 describe('Register integration tests', () => {
+    beforeEach(() => {
+        fetch.mockClear();
+        jest.spyOn(Router, 'push').mockReturnValue(jest.fn());
+    })
+
     it('should dispatch register return error change to page 0 and display errors', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(
             { username: 'Username is taken.', email: 'Email is taken.', password: 'Password must be atleast 10 characters.'}), { status: 422 }))
@@ -122,6 +129,20 @@ describe('Register integration tests', () => {
         expect(inputs.findByTestid('name').prop('value')).toBe(user.name);
         expect(inputs.findByTestid('location').prop('value')).toBe(user.location);
         expect(inputs.findByTestid('description').prop('value')).toBe(user.description);
+    })
+
+    it('should call fetch with data', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({}), { status: 200 }))
+
+        const wrapper = createWrapper({ isLoading: false, error: null });
+        
+        changeFirstPageInputs(wrapper);
+        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        changeSecondPageInputs(wrapper);
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+
+        expect(fetch).toHaveBeenCalledWith('http://localhost:8098/users/register', {body: JSON.stringify(user), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
     })
 
     it('should call dispatch with user object with input values', () => {
