@@ -25,14 +25,14 @@ describe('Pagination unit tests', () => {
     })
 
     it('should render 5 Li pages when page exceed pagesPerSlice', () => {
-        const wrapper = createWrapper({data: { properties:[], pages: 10, maxPages: 5}, query: { take: 2, name: '' }});
+        const wrapper = createWrapper({data: { properties:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
 
         expect(wrapper.find('li').length).toBe(5);
     })
 
     
     it('should not render back button at 1st page', () => {
-        const wrapper = createWrapper({data: { properties:[], pages: 10, maxPages: 5}, query: { take: 2, name: '' }});
+        const wrapper = createWrapper({data: { properties:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
 
         expect(wrapper.findByTestid('back').length).toBe(0);
     })
@@ -43,6 +43,17 @@ describe('Pagination unit tests', () => {
 
         expect(wrapper.findByTestid('next').length).toBe(0);
     })
+
+    it('should render 6 Li with 5 pages of next slide when last page of slide is clicked pages', () => {
+        const wrapper = createWrapper({data: { properties:[], pages: 10, maxPages: 10}, query: { take: 2, name: '' }});
+        wrapper.findByTestid(5).simulate('click');
+
+        expect(wrapper.find('li').length).toBe(6);
+        expect(wrapper.findByTestid('4').length).toBe(0);
+        expect(wrapper.findByTestid('5').length).toBe(1);
+        expect(wrapper.findByTestid('6').length).toBe(1);
+    })
+
 
     it('should dispatch getChats', () => {
         const wrapper = createWrapper({data: { properties:[], pages: 1, maxPages: 5}, query: { take: 2, name: '' }});

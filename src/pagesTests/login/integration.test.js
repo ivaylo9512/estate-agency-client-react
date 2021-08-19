@@ -47,17 +47,11 @@ describe('Login integration tests', () => {
 
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn()});
         
-        new Promise(resolve => setInterval(async() => {
-            wrapper.update();
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        wrapper.update();
             
-            const error = wrapper.findByTestid('error');
-            if(error.length > 0){
-                expect(error.text()).toBe('Bad credentials.');
-                resolve();
-            }            
-        }, 200));
+        expect(wrapper.findByTestid('error').text()).toBe('Bad credentials.');
     })
 
     it('should call fetch with data', async() => {

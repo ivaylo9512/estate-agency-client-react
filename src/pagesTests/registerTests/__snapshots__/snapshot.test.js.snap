@@ -146,11 +146,14 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <button
+      data-testid="next"
       type="submit"
     >
       next
     </button>
-    <span>
+    <span
+      data-testid="redirect"
+    >
       Already have an account?
       <Link
         href="/login"
@@ -210,11 +213,15 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       }
     />
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       back
     </button>
-    <button>
+    <button
+      data-testid="register"
+      type="submit"
+    >
       register
     </button>
   </form>
@@ -371,11 +378,14 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <button
+      data-testid="next"
       type="submit"
     >
       next
     </button>
-    <span>
+    <span
+      data-testid="redirect"
+    >
       Already have an account?
       <Link
         href="/login"
@@ -438,11 +448,15 @@ exports[`RegisterSnapshotTests renders correctly with passed error props with pa
       }
     />
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       back
     </button>
-    <button>
+    <button
+      data-testid="register"
+      type="submit"
+    >
       register
     </button>
   </form>

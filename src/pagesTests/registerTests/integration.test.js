@@ -71,20 +71,13 @@ describe('Register integration tests', () => {
 
         const wrapper = createWrapper({ isLoading: false, error: null });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+       
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        wrapper.update();
 
-        new Promise(resolve => setInterval(() => {
-            wrapper.update();
-
-            const usernameError = wrapper.findByTestid('usernameError');
-            if(usernameError.length > 0){
-                expect(usernameError.text()).toBe('Username is taken.')
-                expect(wrapper.findByTestid('emailError').text()).toBe('Email is taken.')
-                expect(wrapper.findByTestid('passwordError').text()).toBe('Password must be atleast 10 characters.')
-
-                resolve();
-            }
-        }, 200))
+        expect(wrapper.findByTestid('usernameError').text()).toBe('Username is taken.')
+        expect(wrapper.findByTestid('emailError').text()).toBe('Email is taken.')
+        expect(wrapper.findByTestid('passwordError').text()).toBe('Password must be atleast 10 characters.')
     })
 
     it('should dispatch register return errors with page 1', async() => {
@@ -93,20 +86,13 @@ describe('Register integration tests', () => {
 
         const wrapper = createWrapper({ isLoading: false, error: null });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        wrapper.update();
 
-        new Promise(resolve => setInterval(() => {
-            wrapper.update();
-
-            const name = wrapper.findByTestid('nameError');
-            if(name.length > 0){
-                expect(name.text()).toBe('You must provide name.')
-                expect(wrapper.findByTestid('locationError').text()).toBe('You must provide location.')
-                expect(wrapper.findByTestid('descriptionError').text()).toBe('You must provide description.')
-
-                resolve();
-            }
-        }, 200))
+        expect(wrapper.findByTestid('nameError').text()).toBe('You must provide name.')
+        expect(wrapper.findByTestid('locationError').text()).toBe('You must provide location.')
+        expect(wrapper.findByTestid('descriptionError').text()).toBe('You must provide description.')
     })
 
     it('should change inputs values page 0', () => {
