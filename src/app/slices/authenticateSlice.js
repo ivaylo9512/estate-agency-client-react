@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const user = typeof window != 'undefined' && localStorage.getItem('user') 
     ? JSON.parse(localStorage.getItem('user'))
-    : undefined;
+    : null;
 
 const initialState = {
     user,
@@ -51,13 +51,13 @@ const authenticateSlice = createSlice({
         },
         onLogout: (state, {payload}) => {
             state.loginRequest.error = payload
-            state.user = undefined;
+            state.user = null;
             state.isAuth = false;
         },
     }
 })
 
-export const { removeUser, loginRequest, registerRequest, onLoginComplete, onLoginError, onRegisterComplete, onRegisterError } = authenticateSlice.actions
+export const { removeUser, loginRequest, registerRequest, onLoginComplete, onLoginError, onRegisterComplete, onRegisterError, onLogout } = authenticateSlice.actions
 export default authenticateSlice.reducer
 
 export const getLoginRequest = state => state.authenticate.loginRequest;
