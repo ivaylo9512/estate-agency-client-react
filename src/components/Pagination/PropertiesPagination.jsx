@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pagesPerSlide = 4}) => {
-    const {data: { properties, maxPages, pages, isLoading }, query } = useSelector(selector);
+    const {dataInfo: { data, maxPages, pages, isLoading }, query } = useSelector(selector);
 
     const [page, setPage] = useState(1);
     const dispatch = useDispatch();
@@ -13,14 +13,14 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pa
             return;
         }
 
-        const currentData = properties[nextPage - 1];
+        const currentData = data[nextPage - 1];
         if(currentData){
-            dispatch(setCurrentProperties(currentData));
+            dispatch(setCurrentProperties({ currentData, currentPage: nextPage }));
             return setPage(nextPage);
         }
 
         const pagesCount = nextPage - pages; 
-        dispatch(getProperties({...query, pages: pagesCount}))
+        dispatch(getProperties({ ...query, pages: pagesCount }))
         setPage(nextPage)
     }
 
@@ -42,7 +42,7 @@ const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pa
                             pageIndex += slide == 0 ? 1 : 0;
 
                             if(pageIndex <= maxPages){
-                                return <li isSelected={pageIndex == page} key={pageIndex} data-testid={`${pageIndex}`} onClick={() => changePage(pageIndex)}>{pageIndex}</li>}
+                                return <li $isSelected={pageIndex == page} key={pageIndex} data-testid={`${pageIndex}`} onClick={() => changePage(pageIndex)}>{pageIndex}</li>}
                             }
                         )
                     }

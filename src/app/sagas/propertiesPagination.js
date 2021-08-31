@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../../appConstants";
 import { onPropertiesComplete, getPropertiesData } from "../slices/propertiesPaginationSlice";
 import { onUserPropertiesFail } from "../slices/userPropertiesPaginationSlice";
 import { takeLatest, select, put } from 'redux-saga/effects';
@@ -28,14 +28,14 @@ function* getProperties({payload: query}) {
 
 }
 
-const getQueryData = (query, state) => {
+const getQueryData = (query, data) => {
     let minPrice = query.minPrice;
     let maxPrice = query.maxPrice;
     let lastId = 0;
     let takeAmount = query.take * query.pages;
 
-    if(!state.isInitial){
-        const {id, price} = state.lastProperty;
+    if(data.lastData){
+        const { id, price } = data.lastData;
         
         lastId = id;
         query.direction == 'ASC' ? minPrice = price 

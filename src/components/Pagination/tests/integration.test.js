@@ -22,12 +22,12 @@ const store = configureStore({
     middleware,
     preloadedState: {
         propertiesPagination: {
-            data: { 
+            dataInfo: { 
                 pages: 1,
                 maxPages: 5,
-                properties: [initialData],
-                lastProperty: initialData[1],
-                currentProperties: initialData,
+                data: [initialData],
+                lastData: initialData[1],
+                currentData: initialData,
                 isLoading: false,
                 isInitial: false,
             },
@@ -66,24 +66,24 @@ describe('Pagination integration tests', () => {
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(2).simulate('click'));
-        const state = store.getState().propertiesPagination;
+        const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 
-        expect(state.data.currentProperties).toBe(state.data.properties[1]);
-        expect(state.data.maxPages).toBe(5);
-        expect(state.data.pages).toBe(2);
-        expect(state.data.lastProperty).toBe(state.data.properties[1][1])
+        expect(dataInfo.currentData).toBe(dataInfo.data[1]);
+        expect(dataInfo.maxPages).toBe(5);
+        expect(dataInfo.pages).toBe(2);
+        expect(dataInfo.lastData).toBe(dataInfo.data[1][1])
     })
 
     it('should call dispatch with setData when page is already fetched', async() => {
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(1).simulate('click'));
-        const state = store.getState().propertiesPagination;
+        await act(async() => wrapper.findByTestid(2).simulate('click'));
+        const dataInfo = store.getState().propertiesPagination.dataInfo;
 
-        expect(state.data.currentProperties).toBe(state.data.properties[0]);
-        expect(state.data.maxPages).toBe(5);
-        expect(state.data.pages).toBe(2);
+        expect(dataInfo.currentData).toBe(dataInfo.data[1]);
+        expect(dataInfo.maxPages).toBe(5);
+        expect(dataInfo.pages).toBe(2);
     })
 
     it('should should get pages from 2 to 5 and add 2 more to max pages', async() => {
@@ -91,18 +91,18 @@ describe('Pagination integration tests', () => {
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
-        const state = store.getState().propertiesPagination;
+        const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 
-        expect(state.data.currentProperties).toBe(state.data.properties[4]);
-        expect(state.data.maxPages).toBe(7);
-        expect(state.data.pages).toBe(5);
+        expect(dataInfo.currentData).toBe(dataInfo.data[4]);
+        expect(dataInfo.maxPages).toBe(7);
+        expect(dataInfo.pages).toBe(5);
         expect(wrapper.findByTestid(6).at(0).length).toBe(1);
         expect(wrapper.findByTestid(7).at(0).length).toBe(1);
     })
 
-    it('should should get last page', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...getPropertiesPair()]}), {status: 200}));
+    it('should should call fetch with data', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: getPropertiesPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
@@ -112,19 +112,19 @@ describe('Pagination integration tests', () => {
         expect(fetch).toHaveBeenCalledWith('http://localhost:8098/properties/findByWithPage/2//0/5/0/9/ASC');
     })
     
-    it('should should get last page', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: [...getPropertiesPair()]}), {status: 200}));
+    it('should get last page', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: getPropertiesPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
         wrapper.update();
         await act(async() => wrapper.findByTestid(7).at(0).simulate('click'));
-        const state = store.getState().propertiesPagination;
+        const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 
-        expect(state.data.currentProperties).toBe(state.data.properties[6]);
-        expect(state.data.maxPages).toBe(7);
-        expect(state.data.pages).toBe(7);
+        expect(dataInfo.currentData).toBe(dataInfo.data[6]);
+        expect(dataInfo.maxPages).toBe(7);
+        expect(dataInfo.pages).toBe(7);
         expect(wrapper.findByTestid(8).length).toBe(0);
     })
 })

@@ -8,7 +8,6 @@ const initialState = {
         lastData: null,
         currentData: null,
         currentPage: 1,
-
     },
     query: {
         take: 2,
@@ -40,31 +39,36 @@ const userPropertiesPaginationSilce = createSlice({
             state.isInitial = false;
             state.error = null
         },
-        onUserPropertiesError(state, {payload}){
+        onUserPropertiesError(state, { payload }){
             state.isLoading = false
             state.error = payload
         },
-        setUserPropertiesDirection(state, action){
-            state.error = null
-            state.query = initialState.query
-            state.data = initialState.data
-            state.query.direction = action.payload.direction
+        setUserPropertiesDirection(state, { payload }){
+            state.query = {
+                ...initialState.query,
+                direction: payload
+            }
+            state.dataInfo = initialState.dataInfo
+            state.error = initialState.error;
+            state.isInitial = initialState.isInitial;
+            state.isLoading = initialState.isLoading;
         },
-        setCurrentUserProperties(state, action){
-            state.data.currentProperties = action.payload
+        setCurrentUserProperties(state, { payload: { currentData, currentPage } }){
+            state.dataInfo.currentData = currentData;
+            state.dataInfo.currentPage = currentPage;
         },
         resetUserPropertiesState(state){
             state.error = initialState.error;
             state.isLoading = initialState.isLoading;
             state.isInitial = initialState.isInitial;
-            state.data = initialState.data;
+            state.dataInfo = initialState.dataInfo;
             state.query = initialState.query;
         },
     }
 })
-export const {resetUserPropertiesState, onUserPropertiesComplete, onUserPropertiesError, getUserProperties, setUserPropertiesDirection, setCurrentUserProperties} = userPropertiesPaginationSilce.actions
+export const { resetUserPropertiesState, onUserPropertiesComplete, onUserPropertiesError, getUserProperties, setUserPropertiesDirection, setCurrentUserProperties } = userPropertiesPaginationSilce.actions
 export default userPropertiesPaginationSilce.reducer
 
-export const getUserPropertiesData = state => state.userPropertiesPagination.data;
+export const getUserPropertiesData = state => state.userPropertiesPagination.dataInfo;
 export const getUserPropertiesQuery = state => state.userPropertiesPagination.query;
 export const getUserPropertiesState = state => state.userPropertiesPagination;

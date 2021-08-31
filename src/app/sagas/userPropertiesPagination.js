@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../../appConstants";
 import { getUserPropertiesData, onUserPropertiesFail, onUserPropertiesComplete } from "../slices/userPropertiesPaginationSlice";
 import { takeLatest, select, put } from 'redux-saga/effects';
 import splitArray from "../../utils/splitArray";
@@ -37,7 +37,7 @@ const getQueryData = (query, state) => {
     let lastId = 0; 
     let lastName;
     
-    if(!state.isInitial){
+    if(state.lastProperty){
         const {id, name} = state.lastProperty;
 
         lastId = id;

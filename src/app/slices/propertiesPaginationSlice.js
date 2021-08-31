@@ -27,9 +27,9 @@ const propertiesPaginationSilce = createSlice({
     reducers: {
         getProperties(state){
             state.error = null
-            state.dataInfo.isLoading = true;
+            state.isLoading = true;
         },
-        onPropertiesComplete(state, {payload: {pageable, query}}){
+        onPropertiesComplete(state, {payload: { pageable, query }}){
             state.query = query;
             state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
             state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
@@ -41,29 +41,34 @@ const propertiesPaginationSilce = createSlice({
             state.isInitial = false;
             state.error = null
         },
-        onPropertiesFail(state, {payload}){
-            state.dataInfo.isLoading = false
+        onPropertiesError(state, { payload }){
+            state.isLoading = false
             state.error = payload
         },
-        setPropertiesDirection(state, action){
-            state.query = initialState.query
+        setPropertiesDirection(state, { payload }){
+            state.query = {
+                ...initialState.query,
+                direction: payload
+            }
             state.dataInfo = initialState.dataInfo
             state.error = initialState.error;
-            state.query.direction = action.payload.direction
+            state.isInitial = initialState.isInitial;
+            state.isLoading = initialState.isLoading;
         },
-        setCurrentProperties(state, action){
-            state.dataInfo.currentProperties = action.payload
+        setCurrentProperties(state, { payload: { currentData, currentPage } }){
+            state.dataInfo.currentData = currentData;
+            state.dataInfo.currentPage = currentPage;
         },
         resetPropertiesState(state){
             state.isLoading = initialState.isLoading;
             state.isInitial = initialState.isInitial;
-            state.dataInfo = initialState.data
+            state.dataInfo = initialState.dataInfo
             state.query = initialState.query;
             state.error = initialState.error;
         },
     }
 })
-export const { resetPropertiesState, onPropertiesComplete, onPropertiesFail, getProperties, setPropertiesDirection, setCurrentProperties } = propertiesPaginationSilce.actions
+export const { resetPropertiesState, onPropertiesComplete, onPropertiesError, getProperties, setPropertiesDirection, setCurrentProperties } = propertiesPaginationSilce.actions
 export default propertiesPaginationSilce.reducer
 
 export const getPropertiesData = state => state.propertiesPagination.dataInfo;
