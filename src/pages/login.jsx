@@ -3,7 +3,7 @@ import Link from 'next/link'
 import validateEmail from "../utils/validateEmail";
 import usePasswordInput from "../hooks/usePasswordInput";
 import { useDispatch, useSelector } from "react-redux";
-import { loginRequest, getLoginRequest } from "../app/slices/authenticate";
+import { loginRequest, getLoginRequest } from "app/slices/authenticateSlice";
 import { useEffect } from "react";
 
 const Login = () => {

@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../../appConstants";
 import Router from 'next/router';
 import { onCreatePropertyComplete } from "../slices/createPropertySlice";
 import { takeLatest, put } from 'redux-saga/effects';

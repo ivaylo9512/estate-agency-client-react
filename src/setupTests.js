@@ -9,5 +9,7 @@ function findByTestid(id) {
   return this.find(`[data-testid='${id}']`)
 }
 
-ShallowWrapper.prototype.findByTestid = findByTestid
-ReactWrapper.prototype.findByTestid = findByTestid
+ShallowWrapper.prototype.findByTestid = findByTestid;
+ReactWrapper.prototype.findByTestid = findByTestid;
+
+jest.setTimeout(20000);

@@ -2,7 +2,7 @@ import useInput, { getId } from '../hooks/useInput';
 import usePasswordInput from '../hooks/usePasswordInput';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { registerRequest, getRegisterRequest } from '../app/slices/authenticate';
+import { registerRequest, getRegisterRequest } from '../app/slices/authenticateSlice';
 import Link from 'next/link';
 import InputWithError, { getContainerId } from '../components/InputWithError';
 

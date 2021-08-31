@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../constants";
+import { BASE_URL } from "../../appConstants";
 import { onAddFavoriteComplete, onAddFavoriteError } from "../slices/toggleFavorite";
 import { takeEvery, put } from 'redux-saga/effects';
 

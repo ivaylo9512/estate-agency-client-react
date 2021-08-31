@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPropertyFavoriteState, addFavorite, removeFavorite } from "../app/slices/toggleFavorite";
-import LoadingIndicator from "./LoadingIndicator";
+import { getPropertyFavoriteState, addFavorite, removeFavorite } from 'app/slices/toggleFavorite';
+import LoadingIndicator from "./LoadingIndicator/LoadingIndicator";
 
 const FavoriteToggle = memo(({property}) => {
     const [isFavorite, setIsFavorite] = useState(property.isFavorite);

@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Register from '../../pages/register';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import authenticate, { registerRequest } from '../../app/slices/authenticate'
+import authenticate, { registerRequest } from '../../app/slices/authenticateSlice'
 import * as Redux from 'react-redux';
 import createSaga from 'redux-saga';
 import registerWatcher from '../../app/sagas/register';

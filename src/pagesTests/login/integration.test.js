@@ -4,7 +4,7 @@ import createSaga from 'redux-saga';
 import LoginWatcher from '../../app/sagas/login'
 import { Provider } from 'react-redux'
 import { mount, } from 'enzyme';
-import authenticate from '../../app/slices/authenticate'
+import authenticate from '../../app/slices/authenticateSlice'
 import Login from '../../pages/login';
 import 'isomorphic-fetch'
 import { act } from 'react-dom/test-utils';

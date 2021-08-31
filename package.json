@@ -33,11 +33,16 @@
     "eslint": "7.31.0",
     "eslint-config-next": "11.0.1",
     "jsdom": "^17.0.0",
-    "jsdom-global": "^3.0.2"
+    "jsdom-global": "^3.0.2",
+    "redux-saga-test-plan": "^4.0.3"
   },
   "jest": {
     "setupFiles": [
       "<rootDir>/src/setupTests.js"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
     ],
     "testEnvironment": "jsdom",
     "snapshotSerializers": [

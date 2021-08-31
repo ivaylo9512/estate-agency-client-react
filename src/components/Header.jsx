@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import Link from "next/link";
-import { removeUser, getIsAuth } from "../app/slices/authenticate";
+import { removeUser, getIsAuth } from "../app/slices/authenticateSlice";
 
 const Header = () => {
     const dispatch = useDispatch();
