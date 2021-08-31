@@ -1,13 +1,12 @@
-import { takeLatest, put } from 'redux-saga/effects';
-import { onLoginComplete, onLoginError } from '../slices/authenticate';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { onLoginComplete, onLoginError } from '../slices/authenticateSlice';
 import Router from 'next/router';
-import { BASE_URL } from '../../constants';
-
+import { BASE_URL } from 'appConstants';
 
 export default takeLatest('authenticate/loginRequest', login)
 
-function* login({payload}) {
-    const response = yield fetch(`${BASE_URL}/users/login`,{
+export function* login({ payload }) {
+    const response = yield call(fetch, `${BASE_URL}/users/login`, {
         method: 'POST',
         headers:{
             'Content-Type': 'Application/json',

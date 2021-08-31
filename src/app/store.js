@@ -1,5 +1,5 @@
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
-import authenticate from './slices/authenticate';
+import authenticate from './slices/authenticateSlice';
 import propertiesPagination from './slices/propertiesPaginationSlice';
 import createProperty from './slices/createPropertySlice';
 import userPropertiesPagination from './slices/userPropertiesPaginationSlice';

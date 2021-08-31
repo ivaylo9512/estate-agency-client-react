@@ -1,9 +1,11 @@
-const Home = () => {
+import Favorites from 'components/Favorites'
 
+const Home = () => {
     return (
-    <div>
-    </div>
-  )
+        <div>
+            <Favorites />
+        </div>
+    )
 }
 
 export default Home

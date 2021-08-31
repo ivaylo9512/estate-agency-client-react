@@ -1,6 +1,6 @@
 import { BASE_URL } from "../../appConstants";
 import { getUserPropertiesData, onUserPropertiesFail, onUserPropertiesComplete } from "../slices/userPropertiesPaginationSlice";
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { takeLatest, select, put, call } from 'redux-saga/effects';
 import splitArray from "../../utils/splitArray";
 
 export default takeLatest('userPropertiesPagination/getUserProperties', getProperties)
@@ -8,7 +8,7 @@ export default takeLatest('userPropertiesPagination/getUserProperties', getPrope
 function* getProperties({payload: query}) {
     const { name, take, direction, pages, lastName, lastId } = getQueryData(query, yield select(getUserPropertiesData));
 
-    const response = yield fetch(`${BASE_URL}/properties/auth/findUserProperties/${take * pages}/${lastId}/${lastName}/${direction}/${name ? name : ''}`, {
+    const response = yield call(fetch, `${BASE_URL}/properties/auth/findUserProperties/${take * pages}/${lastId}/${lastName}/${direction}/${name ? name : ''}`, {
         headers: {
             Authorization: `Bearer ${localStorage.getItem('Authorization')}`
         }

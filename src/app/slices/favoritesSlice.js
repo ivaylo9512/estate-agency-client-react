@@ -10,11 +10,6 @@ const favoritesSlice = createSlice({
     name: 'favorites',
     initialState,
     reducers: {
-        resetFavorites: (state) => {
-            state.error = null;
-            state.isLoading = null;
-            state.favorites = initialState.favorites
-        },
         getFavorites: (state) => {
             state.isLoading = true;
             state.error = null;
@@ -24,14 +19,19 @@ const favoritesSlice = createSlice({
             state.isLoading = false;
             state.error = null;
         },
-        onFavoritesError: (state, {payload}) => {
+        onFavoritesError: (state, { payload }) => {
             state.isLoading = false;
             state.error = payload
-        }
+        },
+        resetFavorites: (state) => {
+            state.error = initialState.error;
+            state.isLoading = initialState.isLoading;
+            state.favorites = initialState.favorites
+        },
     }
 })
 
-export const {getFavorites, onFavoritesComplete, onFavoritesError, resetFavorites} = favoritesSlice.actions;
+export const { getFavorites, onFavoritesComplete, onFavoritesError, resetFavorites } = favoritesSlice.actions;
 export default favoritesSlice.reducer;
 
 export const getFavoritesState = state => state.favorites;

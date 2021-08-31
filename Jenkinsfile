@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'yarn jest --forceExit' 
             }
         }
         // stage('Production') {

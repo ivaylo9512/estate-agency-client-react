@@ -1,11 +1,11 @@
 import { BASE_URL } from "../../appConstants";
 import { onAddFavoriteComplete, onAddFavoriteError } from "../slices/toggleFavorite";
-import { takeEvery, put } from 'redux-saga/effects';
+import { takeEvery, put, call } from 'redux-saga/effects';
 
 export default takeEvery('toggleFavorite/addFavorite', addFavorite)
 
 function* addFavorite({payload: id}){
-    const response = yield fetch(`${BASE_URL}/properties/auth/addFavorite/${id}`, {
+    const response = yield call(fetch, `${BASE_URL}/properties/auth/addFavorite/${id}`, {
         method: 'PATCH',
         headers: {
             Authorization: `Bearer ${localStorage.getItem('Authorization')}`

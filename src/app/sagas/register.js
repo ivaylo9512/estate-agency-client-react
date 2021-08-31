@@ -1,12 +1,12 @@
-import { BASE_URL } from "../../constants"
-import { put, takeLatest } from "redux-saga/effects";
+import { BASE_URL } from "appConstants"
+import { put, takeLatest, call } from 'redux-saga/effects';
 import Router from 'next/router';
-import { onRegisterComplete, onRegisterError } from "../slices/authenticate";
+import { onRegisterComplete, onRegisterError } from "../slices/authenticateSlice";
 
 export default takeLatest('authenticate/registerRequest', register)
 
-function* register({payload}){
-    const response = yield fetch(`${BASE_URL}/users/register`,{
+export function* register({ payload }){
+    const response = yield call(fetch, `${BASE_URL}/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'Application/json'

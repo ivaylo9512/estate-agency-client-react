@@ -1,8 +1,9 @@
-const { createSlice } = require("@reduxjs/toolkit")
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     isLoading: false,
     error: null,
+    property: null
 }
 
 const createPropertySlice = createSlice({
@@ -13,14 +14,23 @@ const createPropertySlice = createSlice({
             state.isLoading = true;
             state.error = null;
         },
-        onCreatePropertyComplete: (state, action) => {
+        onCreatePropertyComplete: (state, { payload }) => {
             state.isLoading = false;
-            state.error = action.payload.error;
+            state.property = payload;
+        },
+        onCreatePropertyError: (state, { payload }) => {
+            state.isLoading = false;
+            state.error = payload;
+        },
+        resetCreatePropertyState: (state) => {
+            state.isLoading = initialState.isLoading;
+            state.error = initialState.error;
+            state.property = initialState.property;
         }
     }
 })
 
-export const { createPropertyRequest, onCreatePropertyComplete } = createPropertySlice.actions
+export const { createPropertyRequest, onCreatePropertyComplete, onCreatePropertyError, resetCreatePropertyState } = createPropertySlice.actions
 export default createPropertySlice.reducer;
 
 export const getCreatePropertyState = state => state.createProperty

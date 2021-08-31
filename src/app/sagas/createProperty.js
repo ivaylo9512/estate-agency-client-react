@@ -1,12 +1,12 @@
 import { BASE_URL } from "../../appConstants";
 import Router from 'next/router';
 import { onCreatePropertyComplete } from "../slices/createPropertySlice";
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 
 export default takeLatest('createProperty/createPropertyRequest', createProperty);
 
 function* createProperty({payload}){
-    const response = yield fetch(`${BASE_URL}/properties/auth/create`, {
+    const response = yield call(fetch, `${BASE_URL}/properties/auth/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'Application/json',
