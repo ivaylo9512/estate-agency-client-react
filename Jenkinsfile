@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'yarn jest' 
+                sh 'yarn test-jenkins' 
             }
             post {
                 always {
