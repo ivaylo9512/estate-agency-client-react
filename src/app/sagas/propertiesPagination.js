@@ -1,12 +1,11 @@
 import { BASE_URL } from "../../appConstants";
-import { onPropertiesComplete, getPropertiesData } from "../slices/propertiesPaginationSlice";
-import { onUserPropertiesFail } from "../slices/userPropertiesPaginationSlice";
+import { onPropertiesComplete, onPropertiesError, getPropertiesData } from "../slices/propertiesPaginationSlice";
 import { takeLatest, select, put, call } from 'redux-saga/effects';
 import splitArray from "../../utils/splitArray";
 
 export default takeLatest('propertiesPagination/getProperties', getProperties)
 
-function* getProperties({payload: query}) {
+export function* getProperties({payload: query}) {
     const { minPrice, maxPrice, location, bedrooms, take, direction, takeAmount, lastId } =  getQueryData(query, yield select(getPropertiesData))
 
     const response = yield call(fetch, `${BASE_URL}/properties/findByWithPage/${takeAmount}/${location.replace(/[\\?%#/'"]/g, '')}/${bedrooms}/${minPrice}/${maxPrice}/${lastId}/${direction}`)
@@ -15,17 +14,16 @@ function* getProperties({payload: query}) {
         const pageable = yield response.json();
 
         pageable.lastProperty = pageable.data[pageable.data.length - 1];
-        pageable.pages = Math.ceil(pageable.count / query.take);
-        pageable.data = splitArray(pageable.data, query.take);
+        pageable.pages = Math.ceil(pageable.count / take);
+        pageable.data = splitArray(pageable.data, take);
 
         yield put(onPropertiesComplete({
             pageable,
             query
         }))
     }else{
-        yield put(onUserPropertiesFail(yield response.text()));
+        yield put(onPropertiesError(yield response.text()));
     }
-
 }
 
 const getQueryData = (query, data) => {

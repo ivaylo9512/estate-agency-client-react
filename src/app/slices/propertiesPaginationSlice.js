@@ -7,7 +7,7 @@ const initialState = {
         data: [],
         lastData: null,
         currentData: null,
-        currentPage: 1,
+        currentPage: 0,
     },
     query: {
         take: 2,
