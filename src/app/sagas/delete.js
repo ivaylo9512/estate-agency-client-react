@@ -1,4 +1,4 @@
-import { wrapper } from "app/sagas/delete";
+import { wrapper } from "app/sagas/index";
 import { put, takeEvery, call } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import { onDeleteComplete, onDeleteError } from 'app/slices/deleteSlice';
