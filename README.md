@@ -1,0 +1,2 @@
+<img src='http://myjenkins.zapto.org:8080/job/estate-agency-client-react/job/main/badge/icon?flat' />
+<img src="https://img.shields.io/jenkins/coverage/cobertura?jobUrl=http%3A%2F%2Fmyjenkins.zapto.org%3A8080%2Fjob%2Festate-agency-client-react%2Fjob%2Fmain%2FlastSuccessfulBuild%2Fcobertura%2Fapi%2Fjson%3Fdepth%3D2"/>

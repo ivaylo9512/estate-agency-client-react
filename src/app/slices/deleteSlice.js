@@ -8,7 +8,7 @@ const deleteSlice = createSlice({
     name: 'delete',
     initialState,
     reducers: {
-        deleteRequest: (state, { payload: id }) => {
+        deleteProperty: (state, { payload: id }) => {
             let request = state.data[id] ? state.data[id] : state.data[id] = {}; 
             
             request.isLoading = true; 
@@ -32,5 +32,5 @@ const deleteSlice = createSlice({
     }
 })
 
-export const { deleteRequest, onDeleteComplete, onDeleteError, resetDelete } = deleteSlice.actions;
+export const { deleteProperty, onDeleteComplete, onDeleteError, resetDelete } = deleteSlice.actions;
 export default deleteSlice.reducer;
