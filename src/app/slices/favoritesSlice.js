@@ -13,6 +13,7 @@ const favoritesSlice = createSlice({
         getFavorites: (state) => {
             state.isLoading = true;
             state.error = null;
+            state.favorites = null;
         },
         onFavoritesComplete: (state, {payload}) => {
             state.favorites = payload;

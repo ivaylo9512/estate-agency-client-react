@@ -4,7 +4,7 @@ import { BASE_URL } from "../../appConstants";
 
 export default takeLatest('favorites/getFavorites', getFavorites);
 
-function* getFavorites(){
+export function* getFavorites(){
     const response = yield call(fetch, `${BASE_URL}/properties/getFavorites`)
 
     if(response.ok){

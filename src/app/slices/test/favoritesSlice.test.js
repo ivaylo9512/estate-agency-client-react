@@ -17,7 +17,8 @@ describe('favorites slice unit tests', () => {
     it('should set isLoading on get favorites', () => {
         expect(reducer(initialState, getFavorites())).toEqual({
             ...initialState,
-            isLoading: true
+            isLoading: true,
+            favorites: null
         })
     })
 
