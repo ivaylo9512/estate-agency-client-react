@@ -4,11 +4,11 @@ import { takeEvery, put, call } from 'redux-saga/effects';
 
 export default takeEvery('toggleFavorite/addFavorite', addFavorite)
 
-function* addFavorite({payload: id}){
+export function* addFavorite({payload: id}){
     const response = yield call(fetch, `${BASE_URL}/properties/auth/addFavorite/${id}`, {
         method: 'PATCH',
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('Authorization')}`
+            Authorization: localStorage.getItem('Authorization') ? `Bearer ${localStorage.getItem('Authorization')}` : null
         }
     })
 

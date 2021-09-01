@@ -20,11 +20,11 @@ const deleteSlice = createSlice({
             request.isLoading = false;
             request.isDeleted = true;
         },
-        onDeleteError: (state, { payload: id}) => {
+        onDeleteError: (state, { payload: { id, error }}) => {
             const request = state.data[id];
 
             request.isLoading = false;
-            request.error = message;
+            request.error = error;
         },
         resetDelete: (state) => {
             state.data = initialState.data;

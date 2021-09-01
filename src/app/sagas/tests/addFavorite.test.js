@@ -1,16 +1,16 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
-import { deleteProperty } from 'app/sagas/delete';
 import { BASE_URL } from 'appConstants';
-import deleteReducer, { onDeleteComplete, onDeleteError } from 'app/slices/deleteSlice';
+import favoriteReducer, { onAddFavoriteComplete, onAddFavoriteError } from 'app/slices/toggleFavorite';
+import { addFavorite } from 'app/sagas/addFavorite';
 import 'isomorphic-fetch'
 
 describe('delete property saga tests', () => {
-    it('should set state on delete request', () => {
+    it('should set state on toggle favorite request', () => {
         const id = 2;
 
-        return expectSaga(deleteProperty, { payload: id })
-            .withReducer(deleteReducer)
+        return expectSaga(addFavorite, { payload: id })
+            .withReducer(favoriteReducer)
             .withState({
                 data: {
                     2: {
@@ -19,31 +19,32 @@ describe('delete property saga tests', () => {
                 }
             })
             .provide([
-                [call(fetch, `${BASE_URL}/properties/auth/delete/2`, {
-                    method: 'DELETE',
+                [call(fetch, `${BASE_URL}/properties/auth/addFavorite/2`, {
+                    method: 'PATCH',
                     headers:{
                         Authorization: null
                     }
                 }), new Response('done', { status: 200 })]
             ])
-            .put(onDeleteComplete(id))
+            .put(onAddFavoriteComplete(id))
             .hasFinalState({
                 data: {
                     2: {
                         isLoading: false,
-                        isDeleted: true
+                        isFavorite: true,
+                        error: null
                     }
                 }
             })
             .run()
     })
 
-    it('should set error on delete request error', () => {
+    it('should set error on toggle favorite error', () => {
         const id = 2;
         const error = 'Property not found.';
 
-        return expectSaga(deleteProperty, { payload: id })
-            .withReducer(deleteReducer)
+        return expectSaga(addFavorite, { payload: id })
+            .withReducer(favoriteReducer)
             .withState({
                 data: {
                     2: {
@@ -52,19 +53,20 @@ describe('delete property saga tests', () => {
                 }
             })
             .provide([
-                [call(fetch, `${BASE_URL}/properties/auth/delete/2`, {
-                    method: 'DELETE',
+                [call(fetch, `${BASE_URL}/properties/auth/addFavorite/2`, {
+                    method: 'PATCH',
                     headers:{
                         Authorization: null
                     }
                 }), new Response(error, { status: 404 } )]
             ])
-            .put(onDeleteError({ id, error }))
+            .put(onAddFavoriteError({ id, error }))
             .hasFinalState({
                 data: {
                     2: {
                         isLoading: false,
-                        error
+                        error,
+                        isFavorite: false
                     }
                 }
             })

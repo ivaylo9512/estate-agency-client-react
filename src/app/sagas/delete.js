@@ -17,11 +17,11 @@ export function* deleteProperty({payload: id}){
     if(response.ok){
         yield put(onDeleteComplete(id))
     }else{
-        const message = yield response.text()
+        const error = yield response.text()
         if(response.status == 401){
-            throw new UnauthorizedException(message);            
+            throw new UnauthorizedException(error);            
         } 
 
-        yield put(onDeleteError(id));
+        yield put(onDeleteError({ id, error }));
     }
 }
