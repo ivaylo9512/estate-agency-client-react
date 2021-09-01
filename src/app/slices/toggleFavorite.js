@@ -8,47 +8,45 @@ const toggleFavoriteSlice = createSlice({
     name: 'toggleFavorite',
     initialState,
     reducers:{
-        addFavorite: (state, {payload}) => {
-            state.favoriteStates[payload] = {
-                isLoading: true,
-                error: null,
-                isFavorite: true
-            };
+        addFavorite: (state, { payload: id }) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = true;
+            favoriteState.error = null;
         },
-        removeFavorite: (state, {payload}) => {
-            state.favoriteStates[payload] = {
-                isLoading: true,
-                error: null,
-                isFavorite: false
-            }
+        removeFavorite: (state, { payload: id }) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = true;
+            favoriteState.error = null;
         },
-        onAddFavoriteComplete: (state, {payload}) => {
-            state.favoriteStates[payload] = {
-                isLoading: false,
-                error: null,
-                isFavorite: true
-            }
+        onAddFavoriteComplete: (state, { payload: id }) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = false;
+            favoriteState.error = null;
+            favoriteState.isFavorite = true;
         },
-        onAddFavoriteError: (state, {payload: {id, error}}) => {
-            state.favoriteStates[id] = {
-                isLoading: false,
-                error: error,
-                isFavorite: false
-            }
+        onAddFavoriteError: (state, {payload: { id, error }}) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = false;
+            favoriteState.error = error;
+            favoriteState.isFavorite = false;
         },
-        onRemoveFavoriteComplete: (state, {payload}) => {
-            state.favoriteStates[payload] = {
-                isLoading: false,
-                error: null,
-                isFavorite: false
-            }
+        onRemoveFavoriteComplete: (state, { payload: id }) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = false;
+            favoriteState.error = null;
+            favoriteState.isFavorite = false;
         },
-        onRemoveFavoriteError: (state, {payload: {id, error}}) => {
-            state.favoriteStates[id] = {
-                isLoading: false,
-                error: error,
-                isFavorite: true
-            }
+        onRemoveFavoriteError: (state, {payload: { id, error }}) => {
+            const favoriteState = state.favoriteStates[id];
+
+            favoriteState.isLoading = false;
+            favoriteState.error = error;
+            favoriteState.isFavorite = true;
         },
         resetToggleFavoriteState: (state) => {
             state.favoriteStates = initialState.favoriteStates

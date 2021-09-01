@@ -3,6 +3,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { deleteProperty } from 'app/sagas/delete';
 import { BASE_URL } from 'appConstants';
 import deleteReducer, { onDeleteComplete, onDeleteError } from 'app/slices/deleteSlice';
+import 'isomorphic-fetch'
 
 describe('delete property saga tests', () => {
     it('should set state on delete request', () => {
