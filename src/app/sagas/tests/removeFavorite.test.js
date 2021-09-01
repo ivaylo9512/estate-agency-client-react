@@ -1,15 +1,15 @@
 import { call } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import { BASE_URL } from 'appConstants';
-import favoriteReducer, { onAddFavoriteComplete, onAddFavoriteError } from 'app/slices/toggleFavorite';
-import { addFavorite } from 'app/sagas/addFavorite';
+import favoriteReducer, { onRemoveFavoriteComplete, onRemoveFavoriteError } from 'app/slices/toggleFavorite';
+import { removeFavorite } from 'app/sagas/removeFavorite';
 import 'isomorphic-fetch'
 
-describe('add favorite saga tests', () => {
-    it('should set state on add favorite request', () => {
+describe('remove favorite saga tests', () => {
+    it('should set state on remove favorite request', () => {
         const id = 2;
 
-        return expectSaga(addFavorite, { payload: id })
+        return expectSaga(removeFavorite, { payload: id })
             .withReducer(favoriteReducer)
             .withState({
                 data: {
@@ -19,19 +19,19 @@ describe('add favorite saga tests', () => {
                 }
             })
             .provide([
-                [call(fetch, `${BASE_URL}/properties/auth/addFavorite/2`, {
+                [call(fetch, `${BASE_URL}/properties/auth/removeFavorite/2`, {
                     method: 'PATCH',
                     headers:{
                         Authorization: null
                     }
                 }), new Response('done', { status: 200 })]
             ])
-            .put(onAddFavoriteComplete(id))
+            .put(onRemoveFavoriteComplete(id))
             .hasFinalState({
                 data: {
                     2: {
                         isLoading: false,
-                        isFavorite: true,
+                        isFavorite: false,
                         error: null
                     }
                 }
@@ -39,11 +39,11 @@ describe('add favorite saga tests', () => {
             .run()
     })
 
-    it('should set error on add favorite error', () => {
+    it('should set error on remove favorite error', () => {
         const id = 2;
         const error = 'Property not found.';
 
-        return expectSaga(addFavorite, { payload: id })
+        return expectSaga(removeFavorite, { payload: id })
             .withReducer(favoriteReducer)
             .withState({
                 data: {
@@ -53,20 +53,21 @@ describe('add favorite saga tests', () => {
                 }
             })
             .provide([
-                [call(fetch, `${BASE_URL}/properties/auth/addFavorite/2`, {
+                [call(fetch, `${BASE_URL}/properties/auth/removeFavorite/2`, {
                     method: 'PATCH',
                     headers:{
                         Authorization: null
                     }
                 }), new Response(error, { status: 404 } )]
             ])
-            .put(onAddFavoriteError({ id, error }))
+            .put(onRemoveFavoriteError
+                ({ id, error }))
             .hasFinalState({
                 data: {
                     2: {
                         isLoading: false,
                         error,
-                        isFavorite: false
+                        isFavorite: true
                     }
                 }
             })

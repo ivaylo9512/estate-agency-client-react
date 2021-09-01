@@ -52,6 +52,12 @@
     "coverageReporters": [
       "text",
       "cobertura"
+    ],
+    "moduleFileExtensions": [ "js", "json", "jsx" ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/exceptions/**"
     ]
   }
 }
