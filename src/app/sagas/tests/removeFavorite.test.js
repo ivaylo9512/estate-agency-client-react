@@ -60,8 +60,7 @@ describe('remove favorite saga tests', () => {
                     }
                 }), new Response(error, { status: 404 } )]
             ])
-            .put(onRemoveFavoriteError
-                ({ id, error }))
+            .put(onRemoveFavoriteError({ id, error }))
             .hasFinalState({
                 data: {
                     2: {

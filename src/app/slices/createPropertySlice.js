@@ -13,10 +13,12 @@ const createPropertySlice = createSlice({
         createPropertyRequest: (state) => {
             state.isLoading = true;
             state.error = null;
+            state.property = null;
         },
         onCreatePropertyComplete: (state, { payload }) => {
             state.isLoading = false;
             state.property = payload;
+            state.error = null;
         },
         onCreatePropertyError: (state, { payload }) => {
             state.isLoading = false;
