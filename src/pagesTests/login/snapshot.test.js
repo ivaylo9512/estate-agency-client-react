@@ -1,5 +1,5 @@
 import React from 'react';
-import Login from '../../pages/login';
+import Login from 'pages/login';
 import { shallow } from 'enzyme';
 import * as redux from 'react-redux';
 

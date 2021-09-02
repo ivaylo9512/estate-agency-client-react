@@ -1,7 +1,7 @@
-import { BASE_URL } from "../../appConstants";
-import { onPropertiesComplete, onPropertiesError, getPropertiesData } from "../slices/propertiesPaginationSlice";
+import { BASE_URL } from "appConstants";
+import { onPropertiesComplete, onPropertiesError, getPropertiesData } from "app/slices/propertiesPaginationSlice";
 import { takeLatest, select, put, call } from 'redux-saga/effects';
-import splitArray from "../../utils/splitArray";
+import splitArray from "utils/splitArray";
 
 export default takeLatest('propertiesPagination/getProperties', getProperties)
 

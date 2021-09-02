@@ -1,12 +1,12 @@
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
-import authenticate from './slices/authenticateSlice';
-import propertiesPagination from './slices/propertiesPaginationSlice';
-import createProperty from './slices/createPropertySlice';
-import userPropertiesPagination from './slices/userPropertiesPaginationSlice';
-import toggleFavorite from './slices/toggleFavorite';
-import favorites from './slices/favoritesSlice';
+import authenticate from 'slices/authenticateSlice';
+import propertiesPagination from 'slices/propertiesPaginationSlice';
+import createProperty from 'slices/createPropertySlice';
+import userPropertiesPagination from 'slices/userPropertiesPaginationSlice';
+import toggleFavorite from 'slices/toggleFavorite';
+import favorites from 'slices/favoritesSlice';
 import createSaga from 'redux-saga';
-import IndexSagas from './sagas';
+import IndexSagas from 'sagas';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];

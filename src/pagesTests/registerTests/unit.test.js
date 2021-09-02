@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Register from '../../pages/register';
-import InputWithError from '../../components/InputWithError';
+import Register from 'pages/register';
+import InputWithError from 'components/InputWithError';
 import Link from 'next/link';
 import * as redux from 'react-redux';
 

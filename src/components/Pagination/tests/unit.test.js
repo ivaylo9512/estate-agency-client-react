@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import Pagination from '../PropertiesPagination';
+import Pagination from 'components/Pagination/PropertiesPagination';
 import * as redux from 'react-redux';
 import { setCurrentProperties, getProperties } from 'app/slices/propertiesPaginationSlice';
 

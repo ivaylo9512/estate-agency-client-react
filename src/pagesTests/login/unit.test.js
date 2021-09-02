@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Login from '../../pages/login';
+import Login from 'pages/login';
 import * as Redux from 'react-redux';
-import { loginRequest } from '../../app/slices/authenticateSlice';
+import { loginRequest } from 'app/slices/authenticateSlice';
 import Link from 'next/link';
 import * as redux from 'react-redux';
 

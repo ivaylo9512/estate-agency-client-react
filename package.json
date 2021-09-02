@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watchAll",
-    "test-jenkins": "jest --coverage --coverageDirectory=output/coverage/jest"
+    "test-jenkins": "jest --coverage --coverageDirectory=coverage/jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -56,8 +56,7 @@
     "moduleFileExtensions": [ "js", "json", "jsx" ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/exceptions/**"
+      "!**/node_modules/**"
     ]
   }
 }

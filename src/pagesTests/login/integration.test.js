@@ -1,11 +1,11 @@
 import React from 'react';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
-import LoginWatcher from '../../app/sagas/login'
+import LoginWatcher from 'app/sagas/login'
 import { Provider } from 'react-redux'
 import { mount, } from 'enzyme';
-import authenticate from '../../app/slices/authenticateSlice'
-import Login from '../../pages/login';
+import authenticate from 'app/slices/authenticateSlice'
+import Login from 'pages/login';
 import 'isomorphic-fetch'
 import { act } from 'react-dom/test-utils';
 import Router from 'next/router';

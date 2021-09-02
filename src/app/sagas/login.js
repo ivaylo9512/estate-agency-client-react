@@ -1,5 +1,5 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { onLoginComplete, onLoginError } from '../slices/authenticateSlice';
+import { onLoginComplete, onLoginError } from 'app/slices/authenticateSlice';
 import Router from 'next/router';
 import { BASE_URL } from 'appConstants';
 

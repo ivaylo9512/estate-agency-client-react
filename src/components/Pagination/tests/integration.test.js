@@ -2,7 +2,7 @@ import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import propertiesPagination, { getProperties, getPropertiesState, setCurrentProperties } from 'app/slices/propertiesPaginationSlice';
 import PropertiesPaginationWatcher from 'app/sagas/propertiesPagination';
-import Pagination from '../PropertiesPagination'
+import Pagination from 'components/Pagination/PropertiesPagination';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils'

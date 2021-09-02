@@ -1,8 +1,8 @@
-import useInput from "../hooks/useInput"
+import useInput from "hooks/useInput"
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import InputWithError from "../components/InputWithError";
-import { getCreatePropertyState, createPropertyRequest } from "../app/slices/createPropertySlice";
+import InputWithError from "components/InputWithError";
+import { getCreatePropertyState, createPropertyRequest } from "app/slices/createPropertySlice";
 
 const CreateProperty = () => {
     const [createValues, { nameInput, priceInput, locationInput, sizeInput, descriptionInput }] = createInputs(); 

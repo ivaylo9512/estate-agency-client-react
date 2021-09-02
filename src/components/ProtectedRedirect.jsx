@@ -2,7 +2,7 @@ import { useRef, memo, useEffect } from "react"
 import { useRouter } from "next/router"
 import LoadingIndicator from "./LoadingIndicator/LoadingIndicator"
 import { useSelector } from "react-redux"
-import { getUser } from "../app/slices/authenticateSlice"
+import { getUser } from "app/slices/authenticateSlice"
 
 const ProtectedRedirect = memo(({ children }) => {
     const user = useSelector(getUser);

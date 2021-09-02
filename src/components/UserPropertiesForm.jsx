@@ -2,7 +2,7 @@ import useInput from "../hooks/useInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux";
-import { getUserPropertiesQuery, resetUserPropertiesState, getUserProperties } from "../app/slices/userPropertiesPaginationSlice";
+import { getUserPropertiesQuery, resetUserPropertiesState, getUserProperties } from "app/slices/userPropertiesPaginationSlice";
 const UserPropertiesForm = () => {
     const dispatch = useDispatch();
     const query = useSelector(getUserPropertiesQuery);

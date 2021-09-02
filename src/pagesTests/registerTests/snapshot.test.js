@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from '../../pages/register';
+import Register from 'pages/register';
 import { shallow } from 'enzyme';
 import * as redux from 'react-redux';
 

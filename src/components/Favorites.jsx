@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux";
-import { getFavoritesState, getFavorites } from "../app/slices/favoritesSlice";
+import { getFavoritesState, getFavorites } from 'app/slices/favoritesSlice';
 import { useEffect } from "react";
 
 const Favorites = () => {

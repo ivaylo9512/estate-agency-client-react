@@ -1,4 +1,4 @@
-import { getId } from "../hooks/useInput"
+import { getId } from "hooks/useInput"
 
 const InputWithError = ({error, classname = '', input}) => {
 

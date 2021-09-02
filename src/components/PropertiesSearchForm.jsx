@@ -1,9 +1,9 @@
-import useInput from "../hooks/useInput"
-import useMinMaxInput from "../hooks/useMinMaxInput";
+import useInput from "hooks/useInput"
+import useMinMaxInput from "hooks/useMinMaxInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux";
-import { getProperties, resetPropertiesState } from "../app/slices/propertiesPaginationSlice";
+import { getProperties, resetPropertiesState } from "app/slices/propertiesPaginationSlice";
 import { useState, useEffect } from "react";
 
 const PropertiesSearchForm = () => {

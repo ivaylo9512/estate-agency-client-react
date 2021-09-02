@@ -1,12 +1,12 @@
-import loginWatcher from './login';
-import registerWatcher from './register';
-import addFavoriteWatcher from './addFavorite';
-import removeFavoriteWatcher from './removeFavorite';
-import propertiesPaginationWatcher from './propertiesPagination';
-import createPropertyWatcher from './createProperty';
-import favoritesWatcher from './favorites'
+import loginWatcher from 'app/sagas/login';
+import registerWatcher from 'app/sagas/register';
+import addFavoriteWatcher from 'app/sagas/addFavorite';
+import removeFavoriteWatcher from 'app/sagas/removeFavorite';
+import propertiesPaginationWatcher from 'app/sagas/propertiesPagination';
+import createPropertyWatcher from 'app/sagas/createProperty';
+import favoritesWatcher from 'app/sagas/favorites'
 import { all } from 'redux-saga/effects';
-import userPropertiesPaginationWatcher from './userPropertiesPagination';
+import userPropertiesPaginationWatcher from 'app/sagas/userPropertiesPagination';
 
 export default function* IndexSagas(){
     yield all([registerWatcher, loginWatcher, propertiesPaginationWatcher, createPropertyWatcher, userPropertiesPaginationWatcher, favoritesWatcher, addFavoriteWatcher, removeFavoriteWatcher])

@@ -1,6 +1,6 @@
-import { BASE_URL } from "../../appConstants";
+import { BASE_URL } from "appConstants";
 import Router from 'next/router';
-import { onCreatePropertyComplete, onCreatePropertyError } from "../slices/createPropertySlice";
+import { onCreatePropertyComplete, onCreatePropertyError } from "app/slices/createPropertySlice";
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 export default takeLatest('createProperty/createPropertyRequest', createProperty);
