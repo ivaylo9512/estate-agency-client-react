@@ -1,16 +1,16 @@
 import { BASE_URL } from "../../appConstants";
-import { getUserPropertiesData, onUserPropertiesFail, onUserPropertiesComplete } from "../slices/userPropertiesPaginationSlice";
+import { getUserPropertiesData, onUserPropertiesError, onUserPropertiesComplete } from "../slices/userPropertiesPaginationSlice";
 import { takeLatest, select, put, call } from 'redux-saga/effects';
 import splitArray from "../../utils/splitArray";
 
 export default takeLatest('userPropertiesPagination/getUserProperties', getProperties)
 
-function* getProperties({payload: query}) {
+export function* getProperties({payload: query}) {
     const { name, take, direction, pages, lastName, lastId } = getQueryData(query, yield select(getUserPropertiesData));
 
     const response = yield call(fetch, `${BASE_URL}/properties/auth/findUserProperties/${take * pages}/${lastId}/${lastName}/${direction}/${name ? name : ''}`, {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('Authorization')}`
+            Authorization: localStorage.getItem('Authorization') ? `Bearer ${localStorage.getItem('Authorization')}` : null
         }
     })
     if(response.ok){
@@ -25,7 +25,7 @@ function* getProperties({payload: query}) {
             query
         }))        
     }else{
-        yield put(onUserPropertiesFail(yield response.text()));
+        yield put(onUserPropertiesError(yield response.text()));
 
         if(response.status == 401){
             throw new UnauthorizedException(message);            
@@ -36,15 +36,16 @@ function* getProperties({payload: query}) {
 const getQueryData = (query, state) => {
     let lastId = 0; 
     let lastName;
+    let takeAmount = query.take * query.pages;
     
-    if(state.lastProperty){
-        const {id, name} = state.lastProperty;
+    if(state.lastData){
+        const {id, name} = state.lastData;
 
         lastId = id;
 
         if(!query.name) lastName = name
     }
 
-    return {...query, lastId, lastName}
+    return {...query, lastId, lastName, takeAmount}
 }
 
