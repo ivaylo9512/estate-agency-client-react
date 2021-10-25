@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const user = typeof window != 'undefined' && localStorage.getItem('user') 
-    ? JSON.parse(localStorage.getItem('user'))
+export const getLoggedUser = () => typeof window != 'undefined' && localStorage.getItem('user') 
+    ? JSON.parse(localStorage.getItem('user')) 
     : null;
+    
+const user = getLoggedUser();
 
 const initialState = {
     user,
@@ -50,7 +52,11 @@ const authenticateSlice = createSlice({
             state.registerRequest.error = payload;
         },
         onLogout: (state, {payload}) => {
-            state.loginRequest.error = payload
+            state.registerRequest = initialState.registerRequest
+            state.loginRequest = {
+                ...initialState.loginRequest,
+                error: payload
+            }
             state.user = null;
             state.isAuth = false;
         },

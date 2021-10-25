@@ -1,12 +1,13 @@
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
-import authenticate from 'slices/authenticateSlice';
-import propertiesPagination from 'slices/propertiesPaginationSlice';
-import createProperty from 'slices/createPropertySlice';
-import userPropertiesPagination from 'slices/userPropertiesPaginationSlice';
-import toggleFavorite from 'slices/toggleFavorite';
-import favorites from 'slices/favoritesSlice';
+import authenticate from 'app/slices/authenticateSlice';
+import propertiesPagination from 'app/slices/propertiesPaginationSlice';
+import createProperty from 'app/slices/createPropertySlice';
+import userPropertiesPagination from 'app/slices/userPropertiesPaginationSlice';
+import toggleFavorite from 'app/slices/toggleFavorite';
+import deleteProperty from 'app/slices/deleteSlice';
+import favorites from 'app/slices/favoritesSlice';
 import createSaga from 'redux-saga';
-import IndexSagas from 'sagas';
+import IndexSagas from 'app/sagas/';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
@@ -15,6 +16,7 @@ const combinedReducer = combineReducers({
     authenticate,
     propertiesPagination,
     createProperty,
+    deleteProperty,
     userPropertiesPagination,
     favorites,
     toggleFavorite
@@ -39,3 +41,31 @@ const store = configureStore({
 sagaMiddleware.run(IndexSagas);
 
 export default store
+
+export const createTestStore = ({ reducers, watchers, preloadedState}) => {
+    const sagaMiddleware = createSaga();
+    const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
+   
+    const combinedReducer = combineReducers(reducers);
+    const rootReducer = (state, action) => {
+        if(action.type == 'reset'){
+            return combinedReducer(preloadedState, action);
+        }
+
+        return combinedReducer(state, action);
+    }
+
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware,
+        preloadedState
+    })
+
+    if(watchers){
+        sagaMiddleware.run(function*(){
+            yield all(watchers);
+        })
+    }
+
+    return store;
+}
