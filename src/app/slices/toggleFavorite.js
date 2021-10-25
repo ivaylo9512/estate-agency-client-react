@@ -9,13 +9,13 @@ const toggleFavoriteSlice = createSlice({
     initialState,
     reducers:{
         addFavorite: (state, { payload: id }) => {
-            const favoriteState = state.data[id];
+            const favoriteState = state.data[id] ? state.data[id] : state.data[id] = {}; 
 
             favoriteState.isLoading = true;
             favoriteState.error = null;
         },
         removeFavorite: (state, { payload: id }) => {
-            const favoriteState = state.data[id];
+            const favoriteState = state.data[id] ? state.data[id] : state.data[id] = {}; 
 
             favoriteState.isLoading = true;
             favoriteState.error = null;
