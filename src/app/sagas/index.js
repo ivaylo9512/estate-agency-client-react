@@ -5,8 +5,9 @@ import removeFavoriteWatcher from 'app/sagas/removeFavorite';
 import propertiesPaginationWatcher from 'app/sagas/propertiesPagination';
 import createPropertyWatcher from 'app/sagas/createProperty';
 import favoritesWatcher from 'app/sagas/favorites'
-import { all } from 'redux-saga/effects';
+import { all, put } from 'redux-saga/effects';
 import userPropertiesPaginationWatcher from 'app/sagas/userPropertiesPagination';
+import { onLogout } from 'app/slices/authenticateSlice';
 
 export default function* IndexSagas(){
     yield all([registerWatcher, loginWatcher, propertiesPaginationWatcher, createPropertyWatcher, userPropertiesPaginationWatcher, favoritesWatcher, addFavoriteWatcher, removeFavoriteWatcher])
@@ -22,11 +23,11 @@ export function wrapper(request){
                 return yield fetch(action);
             }
 
-            if(err.message == 'Jwt token has expired.'){
+            if(err.message == 'jwt expired'){
                 return yield put(onLogout('Session has expired.')); 
             }
 
-            if(err.message == 'Jwt is incorrect.' || err.message == 'Jwt is missing.'){
+            if(err.message == 'jwt malformed' || err.message == 'No auth token'){
                 return yield put(onLogout());
             }
 

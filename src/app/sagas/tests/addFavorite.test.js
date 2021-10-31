@@ -4,6 +4,8 @@ import { BASE_URL } from 'appConstants';
 import favoriteReducer, { onAddFavoriteComplete, onAddFavoriteError } from 'app/slices/toggleFavorite';
 import { addFavorite } from 'app/sagas/addFavorite';
 import 'isomorphic-fetch'
+import { onLogout } from 'app/slices/authenticateSlice';
+import { wrapper } from '..';
 
 describe('add favorite saga tests', () => {
     it('should set state on add favorite request', () => {
@@ -70,6 +72,24 @@ describe('add favorite saga tests', () => {
                     }
                 }
             })
+            .run()
+    })
+
+    it('should call logout on create property error with 401', () => {
+        const id = 2;
+        localStorage.setItem('Authorization', 'token');
+        
+        return expectSaga(wrapper(addFavorite), { payload: id })
+            .withReducer(favoriteReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/properties/auth/addFavorite/2`, {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization: 'Bearer token'
+                    }
+                }), new Response('jwt expired', { status: 401 })]
+            ])
+            .put(onLogout('Session has expired.'))
             .run()
     })
 })
