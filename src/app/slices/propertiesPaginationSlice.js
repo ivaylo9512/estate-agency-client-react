@@ -36,7 +36,7 @@ const propertiesPaginationSilce = createSlice({
             state.dataInfo.currentPage = state.dataInfo.pages;
             state.dataInfo.lastData = pageable.lastProperty;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
-            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
+            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || state.dataInfo.currentData;
             state.isLoading = false;
             state.isInitial = false;
             state.error = null
@@ -72,5 +72,4 @@ export const { resetPropertiesState, onPropertiesComplete, onPropertiesError, ge
 export default propertiesPaginationSilce.reducer
 
 export const getPropertiesData = state => state.propertiesPagination.dataInfo;
-export const getPropertiesQuery = state => state.propertiesPagination.query;
 export const getPropertiesState = state => state.propertiesPagination;
