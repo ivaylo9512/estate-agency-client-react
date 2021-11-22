@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authenticate from 'app/slices/authenticateSlice';
 import propertiesPagination from 'app/slices/propertiesPaginationSlice';
 import createProperty from 'app/slices/createPropertySlice';
@@ -10,7 +10,6 @@ import createSaga from 'redux-saga';
 import IndexSagas from 'app/sagas/';
 
 const sagaMiddleware = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
 
 const combinedReducer = combineReducers({
     authenticate,
@@ -35,7 +34,7 @@ const rootReducer = (state, action) => {
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware)
 });
 
 sagaMiddleware.run(IndexSagas);
@@ -44,7 +43,6 @@ export default store
 
 export const createTestStore = ({ reducers, watchers, preloadedState}) => {
     const sagaMiddleware = createSaga();
-    const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
    
     const combinedReducer = combineReducers(reducers);
     const rootReducer = (state, action) => {
@@ -57,7 +55,7 @@ export const createTestStore = ({ reducers, watchers, preloadedState}) => {
 
     const store = configureStore({
         reducer: rootReducer,
-        middleware,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
         preloadedState
     })
 
