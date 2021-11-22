@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header snapshot tests should match snapshot with isAuth to false 1`] = `
+<header>
+  <nav>
+    <ul>
+      <li>
+        <Link
+          href="/"
+        >
+          home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/properties"
+        >
+          properties
+        </Link>
+      </li>
+      <li>
+        <Link
+          data-testId="login"
+          href="/login"
+        >
+          login
+        </Link>
+      </li>
+      <li>
+        <Link
+          data-testId="register"
+          href="/register"
+        >
+          register
+        </Link>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;
+
+exports[`Header snapshot tests should match snapshot with isAuth to true 1`] = `
+<header>
+  <nav>
+    <ul>
+      <li>
+        <Link
+          href="/"
+        >
+          home
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/properties"
+        >
+          properties
+        </Link>
+      </li>
+      <li>
+        <Link
+          data-testId="create-property"
+          href="/create-property"
+        >
+          create
+        </Link>
+      </li>
+      <li>
+        <Link
+          data-testId="account"
+          href="/account"
+        >
+          account
+        </Link>
+      </li>
+      <li>
+        <button
+          onClick={[Function]}
+        >
+          logout
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+`;
