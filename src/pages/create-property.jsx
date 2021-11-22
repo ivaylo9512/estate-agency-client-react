@@ -1,5 +1,5 @@
 import useInput from "hooks/useInput"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import InputWithError from "components/InputWithError";
 import { getCreatePropertyState, createPropertyRequest } from "app/slices/createPropertySlice";
