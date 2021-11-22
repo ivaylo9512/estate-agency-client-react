@@ -10,7 +10,7 @@ export function* deleteProperty({payload: id}){
     const response = yield call(fetch, `${BASE_URL}/properties/auth/delete/${id}`, {
         method: 'DELETE',
         headers:{
-            Authorization: localStorage.getItem('Authorization')
+            Authorization: localStorage.getItem('Authorization') ? `Bearer ${localStorage.getItem('Authorization')}` : null
         }
     });
 

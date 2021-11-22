@@ -4,6 +4,8 @@ import { deleteProperty } from 'app/sagas/delete';
 import { BASE_URL } from 'appConstants';
 import deleteReducer, { onDeleteComplete, onDeleteError } from 'app/slices/deleteSlice';
 import 'isomorphic-fetch'
+import { wrapper } from '..';
+import { onLogout } from 'app/slices/authenticateSlice';
 
 describe('delete property saga tests', () => {
     it('should set state on delete request', () => {
@@ -68,6 +70,24 @@ describe('delete property saga tests', () => {
                     }
                 }
             })
+            .run()
+    })
+
+    it('should call logout on delete error with 401', () => {
+        const id = 2;
+
+        localStorage.setItem('Authorization', 'token');
+        return expectSaga(wrapper(deleteProperty), { payload: id })
+            .withReducer(deleteReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/properties/auth/delete/2`, {
+                    method: 'DELETE',
+                    headers:{
+                        Authorization: 'Bearer token'
+                    }
+                }), new Response('jwt expired', { status: 401 })]
+            ])
+            .put(onLogout('Session has expired.'))
             .run()
     })
 })

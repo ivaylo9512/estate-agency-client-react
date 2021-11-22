@@ -7,28 +7,29 @@ import 'isomorphic-fetch'
 
 describe('favorites saga tests', () => {
     it('should set state on get favorites', () => {
-        const properties = [{ id: 1 }, { id: 2 }, { id: 3 }];
+        const favorites = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
-        expectSaga(getFavorites)
+        return expectSaga(getFavorites)
             .withReducer(favoritesReducer)
             .withState({
                 isLoading: true
             })
             .provide([
-                [call(fetch, `${BASE_URL}/properties/getFavorites`), new Response(JSON.stringify(properties), { status: 200 })]
+                [call(fetch, `${BASE_URL}/properties/getFavorites`), new Response(JSON.stringify(favorites), { status: 200 })]
             ])
-            .put(onFavoritesComplete(properties))
+            .put(onFavoritesComplete(favorites))
             .hasFinalState({
                 isLoading: false,
                 error: null,
-                properties
+                favorites
             })
+            .run()
     })
 
     it('should set error on get favorites error', () => {
         const error = 'Unavailable';
 
-        expectSaga(getFavorites)
+        return expectSaga(getFavorites)
             .withReducer(favoritesReducer)
             .withState({
                 isLoading: true
@@ -41,5 +42,6 @@ describe('favorites saga tests', () => {
                 isLoading: false,
                 error,
             })
+            .run()
     })
 })

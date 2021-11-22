@@ -5,7 +5,7 @@ const initialState = {
 }
 
 const deleteSlice = createSlice({
-    name: 'delete',
+    name: 'deleteProperty',
     initialState,
     reducers: {
         deleteProperty: (state, { payload: id }) => {

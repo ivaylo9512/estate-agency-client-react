@@ -4,6 +4,8 @@ import { BASE_URL } from 'appConstants';
 import favoriteReducer, { onRemoveFavoriteComplete, onRemoveFavoriteError } from 'app/slices/toggleFavorite';
 import { removeFavorite } from 'app/sagas/removeFavorite';
 import 'isomorphic-fetch'
+import { wrapper } from '..';
+import { onLogout } from 'app/slices/authenticateSlice';
 
 describe('remove favorite saga tests', () => {
     it('should set state on remove favorite request', () => {
@@ -70,6 +72,24 @@ describe('remove favorite saga tests', () => {
                     }
                 }
             })
+            .run()
+    })
+
+    it('should call onLogout on remove favorite error with 401', () => {
+        const id = 2;
+
+        localStorage.setItem('Authorization', 'token');
+        return expectSaga(wrapper(removeFavorite), { payload: id })
+            .withReducer(favoriteReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/properties/auth/removeFavorite/2`, {
+                    method: 'PATCH',
+                    headers: {
+                        Authorization: 'Bearer token'
+                    }
+                }), new Response('jwt expired', { status: 401 })]
+            ])
+            .put(onLogout('Session has expired.'))
             .run()
     })
 })
