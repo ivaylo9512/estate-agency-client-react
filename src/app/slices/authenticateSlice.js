@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 export const getLoggedUser = () => typeof window != 'undefined' && localStorage.getItem('user') 
     ? JSON.parse(localStorage.getItem('user')) 

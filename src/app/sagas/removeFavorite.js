@@ -1,8 +1,8 @@
-import { BASE_URL } from "appConstants";
-import { onRemoveFavoriteComplete, onRemoveFavoriteError } from "app/slices/toggleFavorite";
+import { BASE_URL } from 'appConstants';
+import { onRemoveFavoriteComplete, onRemoveFavoriteError } from 'app/slices/toggleFavorite';
 import { takeEvery, put, call } from 'redux-saga/effects';
-import { wrapper } from ".";
-import UnauthorizedException from "exceptions/unauthorizedException";
+import { wrapper } from '.';
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeEvery('toggleFavorite/removeFavorite', wrapper(removeFavorite))
 

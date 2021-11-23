@@ -1,9 +1,9 @@
-import { BASE_URL } from "appConstants";
-import { getUserPropertiesData, onUserPropertiesError, onUserPropertiesComplete } from "app/slices/userPropertiesPaginationSlice";
+import { BASE_URL } from 'appConstants';
+import { getUserPropertiesData, onUserPropertiesError, onUserPropertiesComplete } from 'app/slices/userPropertiesPaginationSlice';
 import { takeLatest, select, put, call } from 'redux-saga/effects';
-import splitArray from "utils/splitArray";
-import { wrapper } from ".";
-import UnauthorizedException from "exceptions/unauthorizedException";
+import splitArray from 'utils/splitArray';
+import { wrapper } from '.';
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeLatest('userPropertiesPagination/getUserProperties', wrapper(getProperties))
 

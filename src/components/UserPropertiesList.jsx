@@ -1,9 +1,9 @@
-import { useDispatch } from "react-redux"
-import { useSelector } from "react-redux";
-import { getUserPropertiesState, getUserProperties, resetUserPropertiesState, setCurrentUserProperties } from "app/slices/userPropertiesPaginationSlice";
-import { useEffect } from "react";
-import PropertiesPagination from "./PropertiesPagination";
-import LoadingIndicator from "./LoadingIndicator/LoadingIndicator";
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux';
+import { getUserPropertiesState, getUserProperties, resetUserPropertiesState, setCurrentUserProperties } from 'app/slices/userPropertiesPaginationSlice';
+import { useEffect } from 'react';
+import PropertiesPagination from './PropertiesPagination';
+import LoadingIndicator from './LoadingIndicator/LoadingIndicator';
 
 const UserPropertiesList = () => {
     const dispatch = useDispatch();

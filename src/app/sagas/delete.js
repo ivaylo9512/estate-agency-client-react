@@ -1,8 +1,8 @@
-import { wrapper } from "app/sagas/index";
-import { put, takeEvery, call } from "redux-saga/effects";
-import { BASE_URL } from "appConstants";
+import { wrapper } from 'app/sagas/index';
+import { put, takeEvery, call } from 'redux-saga/effects';
+import { BASE_URL } from 'appConstants';
 import { onDeleteComplete, onDeleteError } from 'app/slices/deleteSlice';
-import UnauthorizedException from "exceptions/unauthorizedException";
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeEvery('delete/deleteProperty', wrapper(deleteProperty));
 

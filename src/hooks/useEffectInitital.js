@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect } from 'react'
 
 const useEffectInitial = (callback, dependencies)  => {
     const isInitial = useRef(true);

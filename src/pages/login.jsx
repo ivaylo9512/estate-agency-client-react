@@ -1,10 +1,10 @@
-import useInput from "hooks/useInput"
+import useInput from 'hooks/useInput'
 import Link from 'next/link'
-import validateEmail from "utils/validateEmail";
-import usePasswordInput from "hooks/usePasswordInput";
-import { useDispatch, useSelector } from "react-redux";
-import { loginRequest, getLoginRequest } from "app/slices/authenticateSlice";
-import { useEffect } from "react";
+import validateEmail from 'utils/validateEmail';
+import usePasswordInput from 'hooks/usePasswordInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest, getLoginRequest } from 'app/slices/authenticateSlice';
+import { useEffect } from 'react';
 
 const Login = () => {
     const [{usernameOrEmail, password}, {usernameOrEmailInput, passwordInput}] = useCreateInputs();
@@ -32,7 +32,7 @@ const Login = () => {
                         {error}
                     </div>
                 }
-                <span data-testid='redirect'>Don't have an account?<Link href="/register"> Sign up.</Link></span>
+                <span data-testid='redirect'>Don't have an account?<Link href='/register'> Sign up.</Link></span>
                 <button data-testid='login' type='submit'>login</button>
             </form>
         </section>

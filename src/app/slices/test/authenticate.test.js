@@ -85,11 +85,11 @@ describe('authenticate slice unit tests', () => {
             isAuth: true,
         }
         
-        expect(reducer(state, onLogout("Session expired."))).toEqual({
+        expect(reducer(state, onLogout('Session expired.'))).toEqual({
             ...initialState,
             loginRequest: {
                 isLoading: false,
-                error: "Session expired."
+                error: 'Session expired.'
             }
         })
     })

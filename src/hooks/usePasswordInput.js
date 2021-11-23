@@ -1,8 +1,8 @@
-import useInput, { InputParams } from "./useInput"
-import { useState } from "react";
+import useInput, { InputParams } from './useInput'
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
     position: relative;

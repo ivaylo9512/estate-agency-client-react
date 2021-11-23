@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 const PropertiesPagination = ({selector, setCurrentProperties, getProperties, pagesPerSlide = 4}) => {
     const {dataInfo: { data, maxPages, pages, isLoading }, query } = useSelector(selector);

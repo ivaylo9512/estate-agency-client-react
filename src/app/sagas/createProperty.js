@@ -1,9 +1,9 @@
-import { BASE_URL } from "appConstants";
+import { BASE_URL } from 'appConstants';
 import Router from 'next/router';
-import { onCreatePropertyComplete, onCreatePropertyError } from "app/slices/createPropertySlice";
+import { onCreatePropertyComplete, onCreatePropertyError } from 'app/slices/createPropertySlice';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { wrapper } from ".";
-import UnauthorizedException from "exceptions/unauthorizedException";
+import { wrapper } from '.';
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeLatest('createProperty/createPropertyRequest', wrapper(createProperty));
 

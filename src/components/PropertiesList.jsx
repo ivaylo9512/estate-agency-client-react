@@ -1,9 +1,9 @@
-import { useSelector, useDispatch } from "react-redux"
-import { getPropertiesData } from "app/slices/propertiesPaginationSlice"
-import LoadingIndicator from "./LoadingIndicator/LoadingIndicator";
-import { resetFavorites } from "app/slices/favoritesSlice";
-import FavoriteToggle from "./FavoritesToggle/FavoriteToggle";
-import { useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux'
+import { getPropertiesData } from 'app/slices/propertiesPaginationSlice'
+import LoadingIndicator from './LoadingIndicator/LoadingIndicator';
+import { resetFavorites } from 'app/slices/favoritesSlice';
+import FavoriteToggle from './FavoritesToggle/FavoriteToggle';
+import { useEffect } from 'react';
 
 const PropertiesList = () => {
     const {currentProperties, isInitial, isLoading}  = useSelector(getPropertiesData)

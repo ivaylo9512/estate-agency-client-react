@@ -1,4 +1,4 @@
-import Favorites from 'components/Favorites'
+import Favorites from 'components/Favorites/Favorites'
 
 const Home = () => {
     return (

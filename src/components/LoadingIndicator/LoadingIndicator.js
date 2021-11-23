@@ -1,4 +1,4 @@
-import { Container, Dot } from "components/LoadingIndicator/LoadingIndicatorStyle"
+import { Container, Dot } from 'components/LoadingIndicator/LoadingIndicatorStyle'
 
 const LoadingIndicator = () => {
 

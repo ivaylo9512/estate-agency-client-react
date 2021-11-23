@@ -1,7 +1,7 @@
-import { BASE_URL } from "appConstants"
+import { BASE_URL } from 'appConstants'
 import { put, takeLatest, call } from 'redux-saga/effects';
 import Router from 'next/router';
-import { onRegisterComplete, onRegisterError } from "app/slices/authenticateSlice";
+import { onRegisterComplete, onRegisterError } from 'app/slices/authenticateSlice';
 
 export default takeLatest('authenticate/registerRequest', register)
 
