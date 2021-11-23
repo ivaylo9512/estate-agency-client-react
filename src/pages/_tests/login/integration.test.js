@@ -32,10 +32,11 @@ describe('Login integration tests', () => {
 
         const wrapper = createWrapper();
 
-        wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
-        wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
-        
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async () => wrapper.findByTestid('username').props().onChange({ target: { value: 'username' }}));
+        await act(async () => wrapper.findByTestid('password').props().onChange({ target: { value: 'password' }}));
+        wrapper.update();
+
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn()}));
         wrapper.update();
             
         expect(wrapper.findByTestid('error').text()).toBe('Bad credentials.');
@@ -46,10 +47,11 @@ describe('Login integration tests', () => {
 
         const wrapper = createWrapper({ isLoading: false, error: null });
         
-        wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
-        wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
+        await act(async () => wrapper.findByTestid('username').props().onChange({ target: { value: 'username' }}));
+        await act(async () => wrapper.findByTestid('password').props().onChange({ target: { value: 'password' }}));
+        wrapper.update();
         
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn()}));
 
         expect(fetch).toHaveBeenCalledWith('http://localhost:8098/users/login', {body: JSON.stringify({username: 'username', password: 'password'}), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
     })

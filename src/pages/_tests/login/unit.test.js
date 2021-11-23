@@ -5,6 +5,7 @@ import * as Redux from 'react-redux';
 import { loginRequest } from 'app/slices/authenticateSlice';
 import Link from 'next/link';
 import * as redux from 'react-redux';
+import { act } from 'react-dom/test-utils';
 
 describe('Login unit tests', () => {
     let selectorSpy;
@@ -33,16 +34,18 @@ describe('Login unit tests', () => {
         expect(wrapper.findByTestid('password').length).toBe(1); 
     })
 
-    it('should call dispatch login with input values', () => {
+    it('should call dispatch login with input values', async () => {
         const mockDispatch = jest.fn();
         const spy = jest.spyOn(Redux, 'useDispatch');
         spy.mockReturnValue(mockDispatch);
 
         const wrapper = createWrapper({ isLoading: false, error: null});
 
-        wrapper.findByTestid('username').simulate('change', { target: { value: 'username'} });
-        wrapper.findByTestid('password').simulate('change', { target: { value: 'password'} });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        await act(async () => wrapper.findByTestid('username').props().onChange({ target: { value: 'username' }}));
+        await act(async () => wrapper.findByTestid('password').props().onChange({ target: { value: 'password' }}));
+        wrapper.update();
+        
+        await act(async () => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
 
         expect(mockDispatch).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
     })
@@ -53,11 +56,12 @@ describe('Login unit tests', () => {
         expect(wrapper.findByTestid('error').text()).toBe('Bad credentials.');
     })
 
-    it('should change input values', () => {
+    it('should change input values', async () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
 
-        wrapper.findByTestid('username').simulate('change', { target: { value: 'username'} });
-        wrapper.findByTestid('password').simulate('change', { target: { value: 'password'} });
+        await act(async () => wrapper.findByTestid('username').props().onChange({ target: { value: 'username' }}));
+        await act(async () => wrapper.findByTestid('password').props().onChange({ target: { value: 'password' }}));
+        wrapper.update();
         
         expect(wrapper.findByTestid('username').prop('value')).toBe('username'); 
         expect(wrapper.findByTestid('password').prop('value')).toBe('password'); 

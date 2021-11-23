@@ -31,21 +31,21 @@ describe('Pagination snpashot tests', () => {
 
     it('renders correctly with pages at page 2 and back button', () => {
         const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(2).simulate('click');
+        wrapper.findByTestid(2).props().onClick();
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with page that is last page of slide should render next slide', () => {
         const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 10, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(5).simulate('click');
+        wrapper.findByTestid(5).props().onClick();
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with pages at last page', () => {
         const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 4, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(4).simulate('click');
+        wrapper.findByTestid(4).props().onClick();
 
         expect(wrapper).toMatchSnapshot();
     })

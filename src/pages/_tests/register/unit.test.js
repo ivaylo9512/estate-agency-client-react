@@ -4,6 +4,7 @@ import Register from 'pages/register';
 import InputWithError from 'components/InputWithError/InputWithError';
 import Link from 'next/link';
 import * as redux from 'react-redux';
+import { act } from 'react-dom/test-utils';
 
 describe('unit tests for Register', () => {
     let selectorSpy;
@@ -34,9 +35,10 @@ describe('unit tests for Register', () => {
         expect(wrapper.findByTestid('repeatPasswordContainer').length).toBe(1);
     })
     
-    it('should render inputs with page 1', () => {
+    it('should render inputs with page 1', async() => {
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
 
         expect(wrapper.find(InputWithError).length).toEqual(3);
         expect(wrapper.findByTestid('nameContainer').length).toBe(1);
@@ -44,11 +46,13 @@ describe('unit tests for Register', () => {
         expect(wrapper.findByTestid('descriptionContainer').length).toBe(1);
     })
 
-    it('should render inputs with page 0 when back button is clicked', () => {
+    it('should render inputs with page 0 when back button is clicked', async() => {
         const wrapper = createWrapper({ isLoading: false, error: null });
         
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
-        wrapper.findByTestid('back').simulate('click', { preventDefault: jest.fn() });
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
+      
+        wrapper.findByTestid('back').props().onClick({ preventDefault: jest.fn() });
 
         expect(wrapper.findByTestid('usernameContainer').length).toBe(1);
         expect(wrapper.findByTestid('emailContainer').length).toBe(1);
@@ -64,9 +68,11 @@ describe('unit tests for Register', () => {
         expect(wrapper.findByTestid('passwordContainer').prop('error')).toBe('Password must be between 10 and 20 characters.');
     })
 
-    it('should render with passed error props with page 1', () => {
+    it('should render with passed error props with page 1', async() => {
         const wrapper = createWrapper({isLoading: false, error: {name: 'Name is required.', location: 'location is required.', description: 'Description is required.'}});
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
+      
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
       
         expect(wrapper.findByTestid('nameContainer').prop('error')).toBe('Name is required.');
         expect(wrapper.findByTestid('locationContainer').prop('error')).toBe('location is required.');
@@ -79,9 +85,11 @@ describe('unit tests for Register', () => {
         expect(wrapper.findByTestid('next').prop('type')).toBe('submit');
     })
 
-    it('should render buttons with page 1', () => {
+    it('should render buttons with page 1', async() => {
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+       
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
 
         expect(wrapper.findByTestid('back').length).toBe(1);
         expect(wrapper.findByTestid('register').prop('type')).toBe('submit');

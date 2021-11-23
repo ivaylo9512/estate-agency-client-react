@@ -25,23 +25,25 @@ const createWrapper = () => {
 
 const user = { username: 'username', password: 'password', name: 'name', email: 'email@gmail.com', location: 'location', description: 'description' };
 
-const changeFirstPageInputs = (wrapper) => {
+const changeFirstPageInputs = async (wrapper) => {
     let inputs = wrapper.find('input');
 
-    inputs.findByTestid('username').simulate('change', { target: { value: user.username } });
-    inputs.findByTestid('email').simulate('change', { target: { value: user.email } });
-    inputs.findByTestid('password').simulate('change', { target: { value: user.password } });
-    inputs.findByTestid('repeatPassword').simulate('change', { target: { value: user.password } });
+    await act(async () => inputs.findByTestid('username').props().onChange({ target: { value: user.username }}));
+    await act(async () => inputs.findByTestid('email').props().onChange({ target: { value: user.email }}));
+    await act(async () => inputs.findByTestid('password').props().onChange({ target: { value: user.password }}));
+    await act(async () => inputs.findByTestid('repeatPassword').props().onChange({ target: { value: user.password }}));
+    wrapper.update();
 
     return wrapper.find('input');
 }
 
-const changeSecondPageInputs = (wrapper) => {
+const changeSecondPageInputs = async (wrapper) => {
     let inputs = wrapper.find('input');
         
-    inputs.findByTestid('name').simulate('change', { target: { value: user.name } });
-    inputs.findByTestid('location').simulate('change', { target: { value: user.location } });
-    inputs.findByTestid('description').simulate('change', { target: { value: user.description } });
+    await act(async () => inputs.findByTestid('name').props().onChange({ target: { value: user.name }}));
+    await act(async () => inputs.findByTestid('location').props().onChange({ target: { value: user.location }}));
+    await act(async () => inputs.findByTestid('description').props().onChange({ target: { value: user.description }}));
+    wrapper.update();
 
     return wrapper.find('input');
 }
@@ -57,9 +59,11 @@ describe('Register integration tests', () => {
             { username: 'Username is taken.', email: 'Email is taken.', password: 'Password must be atleast 10 characters.'}), { status: 422 }))
 
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
        
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         expect(wrapper.findByTestid('usernameError').text()).toBe('Username is taken.')
@@ -72,9 +76,11 @@ describe('Register integration tests', () => {
             { name: 'You must provide name.', location: 'You must provide location.', description: 'You must provide description.'}), { status: 422 }))
 
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
         
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
+        
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         expect(wrapper.findByTestid('nameError').text()).toBe('You must provide name.')
@@ -82,10 +88,10 @@ describe('Register integration tests', () => {
         expect(wrapper.findByTestid('descriptionError').text()).toBe('You must provide description.')
     })
 
-    it('should change inputs values page 0', () => {
+    it('should change inputs values page 0', async() => {
         const wrapper = createWrapper();
 
-        const inputs = changeFirstPageInputs(wrapper);
+        const inputs = await changeFirstPageInputs(wrapper);
 
         expect(inputs.findByTestid('username').prop('value')).toBe(user.username);
         expect(inputs.findByTestid('email').prop('value')).toBe(user.email);
@@ -93,11 +99,13 @@ describe('Register integration tests', () => {
         expect(inputs.findByTestid('repeatPassword').prop('value')).toBe(user.password);
     })
 
-    it('should change inputs values page 1', () => {
+    it('should change inputs values page 1', async() => {
         const wrapper = createWrapper();
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
 
-        const inputs = changeSecondPageInputs(wrapper);
+        const inputs = await changeSecondPageInputs(wrapper);
 
         expect(inputs.findByTestid('name').prop('value')).toBe(user.name);
         expect(inputs.findByTestid('location').prop('value')).toBe(user.location);
@@ -109,11 +117,12 @@ describe('Register integration tests', () => {
 
         const wrapper = createWrapper({ isLoading: false, error: null });
         
-        changeFirstPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        await changeFirstPageInputs(wrapper);
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
         
-        changeSecondPageInputs(wrapper);
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await changeSecondPageInputs(wrapper);
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn()}));
 
         expect(fetch).toHaveBeenCalledWith('http://localhost:8098/users/register', {body: JSON.stringify(user), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
     })
