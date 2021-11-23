@@ -2,8 +2,20 @@
 
 exports[`Favorites snapshot tests should match snapshot 1`] = `
 <div>
-  <div />
-  <div />
-  <div />
+  <div
+    key="first-favorite"
+  >
+    first-favorite
+  </div>
+  <div
+    key="second-favorrite"
+  >
+    second-favorrite
+  </div>
+  <div
+    key="third-favorite"
+  >
+    third-favorite
+  </div>
 </div>
 `;

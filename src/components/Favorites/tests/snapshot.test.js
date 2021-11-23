@@ -11,8 +11,8 @@ describe('Favorites snapshot tests', () => {
         selectorSpy = jest.spyOn(Redux, 'useSelector');
     })
 
-    const createWrapper = (isAuth) => {
-        selectorSpy.mockReturnValue(isAuth);
+    const createWrapper = (favoites) => {
+        selectorSpy.mockReturnValue(favoites);
 
         return shallow(
             <Favorites />
@@ -20,7 +20,7 @@ describe('Favorites snapshot tests', () => {
     }
 
     it('should match snapshot', () => {
-        const wrapper = createWrapper({ favorites: ['first favorite', 'second favorrite', 'third favorite'] });
+        const wrapper = createWrapper({ favorites: [{ id: 'first-favorite', name: 'first favorite' }, { id: 'second-favorrite', name: 'second favorrite' }, { id: 'third-favorite', name: 'third favorite' }]});
 
         expect(wrapper).toMatchSnapshot();
     })
