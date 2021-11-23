@@ -1,5 +1,4 @@
 import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import propertiesPagination, { getProperties, getPropertiesState, setCurrentProperties } from 'app/slices/propertiesPaginationSlice';
 import PropertiesPaginationWatcher from 'app/sagas/propertiesPagination';
 import Pagination from 'components/Pagination/PropertiesPagination';
@@ -7,19 +6,15 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils'
 import 'isomorphic-fetch';
-
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), saga];
+import { createTestStore } from 'app/store';
 
 let id = 0;
 const getPropertiesPair = (price = 5) => [{id: id++, price}, {id: id++, price}]
 
 const initialData = getPropertiesPair();
-const store = configureStore({
-    reducer: {
-        propertiesPagination
-    },
-    middleware,
+const store = createTestStore({
+    reducers: { propertiesPagination },
+    watchers: [ PropertiesPaginationWatcher ],
     preloadedState: {
         propertiesPagination: {
             dataInfo: { 
@@ -43,10 +38,6 @@ const store = configureStore({
     }
 })
 
-saga.run(function*(){
-    yield PropertiesPaginationWatcher
-})
-
 global.fetch = jest.fn();
 
 const createWrapper = () => {
@@ -61,11 +52,12 @@ describe('Pagination integration tests', () => {
     beforeEach(() => {
         fetch.mockClear();
     })
+
     it('should should get page 2', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 8, data: getPropertiesPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(2).simulate('click'));
+        await act(async() => wrapper.findByTestid(2).props().onClick());
         const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 
@@ -78,7 +70,7 @@ describe('Pagination integration tests', () => {
     it('should call dispatch with setData when page is already fetched', async() => {
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(2).simulate('click'));
+        await act(async() => wrapper.findByTestid(2).props().onClick());
         const dataInfo = store.getState().propertiesPagination.dataInfo;
 
         expect(dataInfo.currentData).toBe(dataInfo.data[1]);
@@ -90,7 +82,7 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: [...getPropertiesPair(), ...getPropertiesPair(), ...getPropertiesPair()]}), {status: 200}));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 
@@ -105,9 +97,9 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: getPropertiesPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
-        await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(6).at(0).props().onClick());
 
         expect(fetch).toHaveBeenCalledWith('http://localhost:8098/properties/findByWithPage/2//0/5/0/9/ASC');
     })
@@ -116,9 +108,9 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: getPropertiesPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
-        await act(async() => wrapper.findByTestid(7).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(7).at(0).props().onClick());
         const dataInfo = store.getState().propertiesPagination.dataInfo;
         wrapper.update();
 

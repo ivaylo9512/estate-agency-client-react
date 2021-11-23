@@ -1,30 +1,17 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Register from 'pages/register';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import authenticate, { registerRequest } from 'app/slices/authenticateSlice'
-import * as Redux from 'react-redux';
-import createSaga from 'redux-saga';
+import authenticate from 'app/slices/authenticateSlice'
 import registerWatcher from 'app/sagas/register';
 import 'isomorphic-fetch';
 import { act } from 'react-dom/test-utils';
 import Router from 'next/router';
+import { createTestStore } from 'app/store';
+import { Provider } from 'react-redux';
 
-const { Provider } = Redux;
 
-const sagaMiddleware = createSaga();
-const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
+const store = createTestStore({ reducers: { authenticate }, watchers: [ registerWatcher ]})
 
-const store = configureStore({
-    reducer: {
-        authenticate,
-    },
-    middleware
-});
-
-sagaMiddleware.run(function*(){
-    yield registerWatcher
-});
 
 global.fetch = jest.fn();
 
@@ -129,21 +116,5 @@ describe('Register integration tests', () => {
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
 
         expect(fetch).toHaveBeenCalledWith('http://localhost:8098/users/register', {body: JSON.stringify(user), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
-    })
-
-    it('should call dispatch with user object with input values', () => {
-        const useDispatchSpy = jest.spyOn(Redux, 'useDispatch'); 
-        const mockedDispatch = jest.fn()
-        useDispatchSpy.mockReturnValue(mockedDispatch);
-
-        const wrapper = createWrapper();
-        
-        changeFirstPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-        
-        changeSecondPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-
-        expect(mockedDispatch).toHaveBeenCalledWith(registerRequest(user))
     })
 }); 

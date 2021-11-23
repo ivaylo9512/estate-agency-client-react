@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import Register from 'pages/register';
-import InputWithError from 'components/InputWithError';
+import InputWithError from 'components/InputWithError/InputWithError';
 import Link from 'next/link';
 import * as redux from 'react-redux';
 
@@ -15,6 +15,7 @@ describe('unit tests for Register', () => {
 
         dispatchSpy.mockReturnValue(jest.fn());
     })
+
     const createWrapper = (state) => {
         selectorSpy.mockReturnValue(state);
         

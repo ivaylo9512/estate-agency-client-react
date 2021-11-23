@@ -1,6 +1,4 @@
 import React from 'react';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import createSaga from 'redux-saga';
 import LoginWatcher from 'app/sagas/login'
 import { Provider } from 'react-redux'
 import { mount, } from 'enzyme';
@@ -9,20 +7,9 @@ import Login from 'pages/login';
 import 'isomorphic-fetch'
 import { act } from 'react-dom/test-utils';
 import Router from 'next/router';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), saga]
-
-const store = configureStore({
-    reducer: {
-        authenticate
-    },
-    middleware
-})
-
-saga.run(function*(){
-    yield LoginWatcher
-})
+const store = createTestStore({ reducers: { authenticate }, watchers: [ LoginWatcher ]});
 
 global.fetch = jest.fn();
 

@@ -8,6 +8,7 @@ import deleteProperty from 'app/slices/deleteSlice';
 import favorites from 'app/slices/favoritesSlice';
 import createSaga from 'redux-saga';
 import IndexSagas from 'app/sagas/';
+import { all } from 'redux-saga/effects';
 
 const sagaMiddleware = createSaga();
 
@@ -43,7 +44,7 @@ export default store
 
 export const createTestStore = ({ reducers, watchers, preloadedState}) => {
     const sagaMiddleware = createSaga();
-   
+
     const combinedReducer = combineReducers(reducers);
     const rootReducer = (state, action) => {
         if(action.type == 'reset'){

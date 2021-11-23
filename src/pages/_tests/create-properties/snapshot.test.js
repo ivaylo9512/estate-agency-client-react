@@ -6,8 +6,7 @@ describe('create properties snapshot tests', () => {
     let selectorSpy;
 
     beforeAll(() => {
-        const dispatchMock = jest.fn();
-        jest.spyOn(Redux, 'useDispatch').mockReturnValue(dispatchMock);
+        jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
 
         selectorSpy = jest.spyOn(Redux, 'useSelector');
     })

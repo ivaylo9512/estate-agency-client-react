@@ -1,7 +1,7 @@
 import useInput from "hooks/useInput"
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import InputWithError from "components/InputWithError";
+import InputWithError from "components/InputWithError/InputWithError";
 import { getCreatePropertyState, createPropertyRequest } from "app/slices/createPropertySlice";
 
 const CreateProperty = () => {

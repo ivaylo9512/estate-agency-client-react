@@ -3,18 +3,18 @@ import Login from 'pages/login';
 import { shallow } from 'enzyme';
 import * as redux from 'react-redux';
 
-describe("Login snapshot tests", () => {
+describe('Login snapshot tests', () => {
     let selectorSpy;
 
     beforeAll(() => {
+        jest.spyOn(redux, 'useDispatch').mockReturnValue(jest.fn());
+      
         selectorSpy = jest.spyOn(redux, 'useSelector');
-    
-        const spyOnUseDispatch = jest.spyOn(redux, 'useDispatch');
-        spyOnUseDispatch.mockReturnValue(jest.fn());
     });
 
     const createWrapper = (state) => {
         selectorSpy.mockReturnValue(state);
+
         return shallow(
             <Login />
         )

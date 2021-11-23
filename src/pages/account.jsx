@@ -1,5 +1,5 @@
 import UserPropertiesList from "components/UserPropertiesList"
-import UserPropertiesForm from "components/UserPropertiesForm"
+import UserPropertiesForm from "components/UserPropertiesForm/UserPropertiesForm"
 
 const Account = () => {
 

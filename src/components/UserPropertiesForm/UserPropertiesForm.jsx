@@ -1,8 +1,9 @@
-import useInput from "../hooks/useInput";
+import useInput from "../../hooks/useInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux";
 import { getUserPropertiesQuery, resetUserPropertiesState, getUserProperties } from "app/slices/userPropertiesPaginationSlice";
+
 const UserPropertiesForm = () => {
     const dispatch = useDispatch();
     const query = useSelector(getUserPropertiesQuery);
@@ -21,9 +22,9 @@ const UserPropertiesForm = () => {
     return(
         <div>
             <form onSubmit={submit}>
-            <FontAwesomeIcon icon={faSearch}/>
-            {nameInput}
-            <button>enter</button>
+                <FontAwesomeIcon icon={faSearch}/>
+                {nameInput}
+                <button>enter</button>
             </form>
         </div>
     )

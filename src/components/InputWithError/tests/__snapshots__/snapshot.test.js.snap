@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputWithError snapshot tests should match snapshot 1`] = `
+<div
+  className="error "
+>
+  <input
+    data-testid="input-id"
+  />
+  <div
+    data-testid="input-idError"
+  >
+    error
+  </div>
+</div>
+`;

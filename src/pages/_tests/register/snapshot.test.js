@@ -8,6 +8,7 @@ describe('RegisterSnapshotTests', () => {
 
     beforeAll(() => {
         selectorSpy = jest.spyOn(redux, 'useSelector');
+        
         jest.spyOn(redux, 'useDispatch').mockReturnValue(jest.fn());
     })
 
