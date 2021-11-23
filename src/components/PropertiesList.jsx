@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getPropertiesData } from "app/slices/propertiesPaginationSlice"
 import LoadingIndicator from "./LoadingIndicator/LoadingIndicator";
 import { resetFavorites } from "app/slices/favoritesSlice";
-import FavoriteToggle from "./FavoriteToggle";
+import FavoriteToggle from "./FavoritesToggle/FavoriteToggle";
 import { useEffect } from "react";
 
 const PropertiesList = () => {

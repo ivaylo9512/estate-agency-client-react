@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FavoriteToggle snapshot tests should match snapshot with favoritesState and isLoading to false and and isFavorite to false 1`] = `
+<button
+  onClick={[Function]}
+>
+  add
+</button>
+`;
+
+exports[`FavoriteToggle snapshot tests should match snapshot with favoritesState and isLoading to false and isFavorite to true 1`] = `
+<button
+  onClick={[Function]}
+>
+  remove
+</button>
+`;
+
+exports[`FavoriteToggle snapshot tests should match snapshot with favoritesState and isLoading to true 1`] = `
+<button
+  onClick={[Function]}
+>
+  <LoadingIndicator />
+</button>
+`;
+
+exports[`FavoriteToggle snapshot tests should match snapshot with undefined favoritesState 1`] = `
+<button
+  onClick={[Function]}
+>
+  remove
+</button>
+`;
