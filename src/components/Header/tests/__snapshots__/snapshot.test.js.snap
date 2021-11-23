@@ -18,22 +18,7 @@ exports[`Header snapshot tests should match snapshot with isAuth to false 1`] = 
           properties
         </Link>
       </li>
-      <li>
-        <Link
-          data-testId="login"
-          href="/login"
-        >
-          login
-        </Link>
-      </li>
-      <li>
-        <Link
-          data-testId="register"
-          href="/register"
-        >
-          register
-        </Link>
-      </li>
+      <AuthItems />
     </ul>
   </nav>
 </header>
@@ -57,29 +42,9 @@ exports[`Header snapshot tests should match snapshot with isAuth to true 1`] = `
           properties
         </Link>
       </li>
-      <li>
-        <Link
-          data-testId="create-property"
-          href="/create-property"
-        >
-          create
-        </Link>
-      </li>
-      <li>
-        <Link
-          data-testId="account"
-          href="/account"
-        >
-          account
-        </Link>
-      </li>
-      <li>
-        <button
-          onClick={[Function]}
-        >
-          logout
-        </button>
-      </li>
+      <LoggedItems
+        logout={[Function]}
+      />
     </ul>
   </nav>
 </header>
